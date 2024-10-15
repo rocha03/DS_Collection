@@ -99,6 +99,9 @@ public abstract class LinkedList<T> implements ListADT<T> {
         return null;
     }
 
+    /**
+     * 
+     */
     private class BasicIterator<E> {
         
     }
