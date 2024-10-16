@@ -57,7 +57,7 @@ public class CircularArrayQueue<T> implements QueueADT<T> {
 
     @Override
     public void enqueue(T element) {
-        if (count == queue.length)
+        if (size() == queue.length)
             expand();
         queue[rear] = element;
         rear = loop(rear);
@@ -88,9 +88,7 @@ public class CircularArrayQueue<T> implements QueueADT<T> {
 
     @Override
     public boolean isEmpty() {
-        if (count == 0)
-            return true;
-        return false;
+        return size() == 0;
     }
 
     @Override
@@ -105,5 +103,17 @@ public class CircularArrayQueue<T> implements QueueADT<T> {
      */
     private int loop(int index) {
         return (index + 1) % queue.length;
+    }
+
+    @Override
+    public String toString() {
+        String result = "Queue Front to Rear:\nNumber of elements: " + rear + "\n--START--\n";
+        int j = front;
+        for (int i = front; i < count; i++) {
+            result = result + queue[j].toString() + "\n";
+            j = loop(j);
+        }
+        result += "--END--\n";
+        return result;
     }
 }

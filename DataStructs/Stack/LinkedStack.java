@@ -27,16 +27,14 @@ public class LinkedStack<T> implements StackADT<T> {
 
     @Override
     public boolean isEmpty() {
-        if (this.count == 0)
-            return true;
-        return false;
+        return size() == 0;
     }
 
     @Override
     public T peek() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("Empty Stack ");
-        return this.top.getElement();
+        return top.getElement();
     }
 
     @Override
@@ -45,20 +43,21 @@ public class LinkedStack<T> implements StackADT<T> {
             throw new EmptyCollectionException("Empty Stack ");
         T removed = top.getElement();
         top = top.getNext();
+        count--;
         return removed;
     }
 
     @Override
     public void push(T element) {
         LinearNode<T> newNode = new LinearNode<T>(element);
-        newNode.setNext(this.top);
-        this.top = newNode;
-        this.count++;
+        newNode.setNext(top);
+        top = newNode;
+        count++;
     }
 
     @Override
     public int size() {
-        return this.count;
+        return count;
     }
 
     @Override

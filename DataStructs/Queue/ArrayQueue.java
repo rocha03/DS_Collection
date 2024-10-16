@@ -14,6 +14,10 @@ public class ArrayQueue<T> implements QueueADT<T> {
     /**
      * 
      */
+    private static final int FRONT = 0;
+    /**
+     * 
+     */
     private T[] queue;
     /**
      * 
@@ -41,8 +45,8 @@ public class ArrayQueue<T> implements QueueADT<T> {
     public T dequeue() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("Queue is empty.\n");
-        T removed = queue[0];
-        for (int i = 0; i < rear; i++) {
+        T removed = queue[FRONT];
+        for (int i = FRONT; i < rear - 1; i++) {
             queue[i] = queue[i + 1];
         }
         rear--;
@@ -51,7 +55,7 @@ public class ArrayQueue<T> implements QueueADT<T> {
 
     @Override
     public void enqueue(T element) {
-        if (rear == queue.length)
+        if (size() == queue.length)
             expand();
         queue[rear++] = element;
     }
@@ -61,7 +65,7 @@ public class ArrayQueue<T> implements QueueADT<T> {
      */
     private void expand() {
         T[] newQueue = (T[]) (new Object[queue.length * 2]);
-        for (int i = 0; i < queue.length; i++) {
+        for (int i = FRONT; i < queue.length; i++) {
             newQueue[i] = queue[i];
         }
         this.queue = newQueue;
@@ -71,14 +75,12 @@ public class ArrayQueue<T> implements QueueADT<T> {
     public T first() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("Queue is empty.\n");
-        return queue[0];
+        return queue[FRONT];
     }
 
     @Override
     public boolean isEmpty() {
-        if (rear == 0)
-            return true;
-        return false;
+        return size() == 0;
     }
 
     @Override
@@ -89,7 +91,7 @@ public class ArrayQueue<T> implements QueueADT<T> {
     @Override
     public String toString() {
         String result = "Queue Front to Rear:\nNumber of elements: " + rear + "\n--START--\n";
-        for (int i = 0; i < this.rear; i++) {
+        for (int i = FRONT; i < this.rear; i++) {
             result = result + this.queue[i].toString() + "\n";
         }
         result += "--END--\n";

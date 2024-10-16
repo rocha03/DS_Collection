@@ -42,35 +42,28 @@ public class ArrayStack<T> implements StackADT<T> {
     // do I have to put javadoc on implemented methods?
     @Override
     public boolean isEmpty() {
-        if (this.top == 0)
-            return true;
-        return false;
+        return size() == 0;
     }
 
     @Override
-    public T peek() throws EmptyCollectionException { // how do I fix this?
+    public T peek() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("Empty Stack ");
-
-        return this.stack[this.top - 1];
+        return stack[top - 1];
     }
 
     @Override
-    public T pop() throws EmptyCollectionException { // how do I fix this?
+    public T pop() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("Empty Stack ");
-
-        this.top--;
-        return this.stack[this.top - 1];// do I have to set the removed to null?
+        return stack[--top - 1];
     }
 
     @Override
     public void push(T element) {
-        if (size() == this.stack.length)
+        if (size() == stack.length)
             expand();
-
-        this.stack[this.top] = element;
-        this.top++;
+        stack[top++] = element;
     }
 
     /**
@@ -78,24 +71,22 @@ public class ArrayStack<T> implements StackADT<T> {
      */
     public void expand() {
         T[] newStack = (T[]) (new Object[stack.length * 2]);
-
         for (int i = 0; i < stack.length; i++) {
             newStack[i] = stack[i];
         }
-
-        this.stack = newStack;
+        stack = newStack;
     }
 
     @Override
     public int size() {
-        return this.top;
+        return top;
     }
 
     @Override
     public String toString() {
         String result = "Stack Top to Bottom:\nNumber of elements: " + top + "\n--START--\n";
-        for (int i = 0; i < this.top; i++) {
-            result = result + this.stack[i].toString() + "\n";
+        for (int i = 0; i < top; i++) {
+            result = result + stack[i].toString() + "\n";
         }
         result += "--END--\n";
         return result;
