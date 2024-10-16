@@ -59,9 +59,7 @@ public abstract class ArrayList<T> implements ListADT<T> {
 
     @Override
     public boolean isEmpty() {
-        if (count == 0)
-            return true;
-        return false;
+        return size() == 0;
     }
 
     @Override

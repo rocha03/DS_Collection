@@ -1,5 +1,7 @@
 package Interfaces.List;
 
+import java.util.Iterator;
+
 import Exceptions.ElementNotFoundException;
 import Exceptions.EmptyCollectionException;
 
@@ -68,7 +70,7 @@ public interface ListADT<T> extends Iterable<T> {
      *
      * @return an iterator over the elements in this list
      */
-    // public Iterator<T> iterator();
+    public Iterator<T> iterator();
 
     /**
      * Returns a string representation of this list.
