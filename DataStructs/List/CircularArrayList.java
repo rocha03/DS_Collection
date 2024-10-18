@@ -56,8 +56,7 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
     public T last() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("The list is empty. ");
-        // TODO Auto-generated method stub
-        return null;
+        return list[tail];
     }
 
     @Override
