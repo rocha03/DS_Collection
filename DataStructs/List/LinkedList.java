@@ -7,22 +7,11 @@ import Exceptions.ElementNotFoundException;
 import Exceptions.EmptyCollectionException;
 import Interfaces.List.ListADT;
 
-/**
- * 
- */
 public abstract class LinkedList<T> implements ListADT<T> {
-    /**
-     * 
-     */
+
     private int count;
-    /**
-     * 
-     */
     private LinearNode<T> head;
 
-    /**
-     * 
-     */
     public LinkedList() {
         this.count = 0;
         this.head = null;
@@ -43,9 +32,7 @@ public abstract class LinkedList<T> implements ListADT<T> {
 
     @Override
     public boolean isEmpty() {
-        if (count == 0)
-            return true;
-        return false;
+        return count == 0;
     }
 
     @Override

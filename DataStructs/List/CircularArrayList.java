@@ -10,25 +10,11 @@ import Interfaces.List.ListADT;
  * 
  */
 public abstract class CircularArrayList<T> implements ListADT<T> {
-    /**
-     * 
-     */
+
     private static final int DEFAULT = 10;
-    /**
-     * 
-     */
     private T[] list;
-    /**
-     * 
-     */
     private int head;
-    /**
-     * 
-     */
     private int tail;
-    /**
-     * 
-     */
     private int count;
 
     /**
@@ -63,9 +49,7 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
 
     @Override
     public boolean isEmpty() {
-        if (count == 0)
-            return true;
-        return false;
+        return count == 0;
     }
 
     @Override

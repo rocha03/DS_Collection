@@ -1,7 +1,6 @@
 package DataStructs.List;
 
 import java.util.Iterator;
-
 import Interfaces.List.ListADT;
 
 public abstract class DoublyLinkedList<T> implements ListADT<T> {
