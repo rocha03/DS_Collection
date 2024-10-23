@@ -12,8 +12,7 @@ public class ArrayStack<T> implements StackADT<T> {
      */
     private final int DEFAULT_CAPACITY = 100;
     /**
-     * int that represents both the number of elements and the next
-     * available position in the array.
+     * int that represents both the number of elements and the next available position in the array.
      */
     private int top;
     /**
@@ -31,7 +30,6 @@ public class ArrayStack<T> implements StackADT<T> {
 
     /**
      * Creates an empty stack using the specified capacity.
-     * 
      * @param initialCapacity Represents the specified capacity.
      */
     public ArrayStack(int initialCapacity) {
@@ -40,6 +38,7 @@ public class ArrayStack<T> implements StackADT<T> {
     }
 
     // do I have to put javadoc on implemented methods?
+    // yes
     @Override
     public boolean isEmpty() {
         return size() == 0;
