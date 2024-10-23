@@ -3,37 +3,19 @@ package DataStructs.Queue;
 import Exceptions.EmptyCollectionException;
 import Interfaces.QueueADT;
 
-/**
- * 
- */
 public class ArrayQueue<T> implements QueueADT<T> {
-    /**
-     * 
-     */
+
     private static final int DEFAULT_CAPACITY = 100;
-    /**
-     * 
-     */
     private static final int FRONT = 0;
-    /**
-     * 
-     */
     private T[] queue;
-    /**
-     * 
-     */
     private int rear;
 
-    /**
-     * 
-     */
     public ArrayQueue() {
         this.queue = (T[]) (new Object[DEFAULT_CAPACITY]);
         this.rear = 0;
     }
 
     /**
-     * 
      * @param size
      */
     public ArrayQueue(int size) {
@@ -60,9 +42,6 @@ public class ArrayQueue<T> implements QueueADT<T> {
         queue[rear++] = element;
     }
 
-    /**
-     * 
-     */
     private void expand() {
         T[] newQueue = (T[]) (new Object[queue.length * 2]);
         for (int i = FRONT; i < queue.length; i++) {

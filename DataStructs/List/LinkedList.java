@@ -19,7 +19,13 @@ public abstract class LinkedList<T> implements ListADT<T> {
 
     @Override
     public boolean contains(T target) {
-        // TODO Auto-generated method stub
+        LinearNode<T> current = head;
+        while (current != null) {
+            if (current.getElement().equals(target)) {
+                return true;
+            }
+            current = current.getNext();
+        }
         return false;
     }
 
@@ -49,8 +55,24 @@ public abstract class LinkedList<T> implements ListADT<T> {
     public T remove(T element) throws EmptyCollectionException, ElementNotFoundException {
         if (isEmpty())
             throw new EmptyCollectionException("The list is empty. ");
-        // TODO Auto-generated method stub
-        return null;
+        LinearNode<T> current = head;
+        LinearNode<T> previous = null;
+
+        while (current != null) {
+            if (current.getElement().equals(element)) {
+                if (previous == null) {
+                    // Removing the head
+                    head = current.getNext();
+                } else {
+                    previous.setNext(current.getNext());
+                }
+                count--;
+                return current.getElement();
+            }
+            previous = current;
+            current = current.getNext();
+        }
+        throw new ElementNotFoundException("Element not found in the list.");
     }
 
     @Override
