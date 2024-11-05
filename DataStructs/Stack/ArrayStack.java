@@ -4,7 +4,7 @@ import Exceptions.EmptyCollectionException;
 import Interfaces.StackADT;
 
 /**
- * 
+ * The ArrayStack class implements a stack using an array.
  */
 public class ArrayStack<T> implements StackADT<T> {
     /**
@@ -67,7 +67,7 @@ public class ArrayStack<T> implements StackADT<T> {
     }
 
     /**
-     * 
+     * Expands the capacity of the stack by doubling the size of the array.
      */
     public void expand() {
         T[] newStack = (T[]) (new Object[stack.length * 2]);

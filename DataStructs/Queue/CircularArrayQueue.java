@@ -4,32 +4,32 @@ import Exceptions.EmptyCollectionException;
 import Interfaces.QueueADT;
 
 /**
- * 
+ * The CircularArrayQueue class implements a circular queue using an array.
  */
 public class CircularArrayQueue<T> implements QueueADT<T> {
     /**
-     * 
+     * Default capacity of the queue.
      */
     private static final int DEFAULT_CAPACITY = 100;
     /**
-     * 
+     * Array that stores the elements of the queue.
      */
     private T[] queue;
     /**
-     * 
+     * Index of the front of the queue.
      */
     private int front;
     /**
-     * 
+     * Index of the rear of the queue.
      */
     private int rear;
     /**
-     * 
+     * Count of elements in the queue.
      */
     private int count;
 
     /**
-     * 
+     * Creates a circular queue with the default capacity.
      */
     public CircularArrayQueue() {
         this.queue = (T[]) (new Object[DEFAULT_CAPACITY]);
@@ -37,8 +37,9 @@ public class CircularArrayQueue<T> implements QueueADT<T> {
     }
 
     /**
+     * Creates a circular queue with the specified capacity.
      * 
-     * @param size
+     * @param size the capacity of the queue.
      */
     public CircularArrayQueue(int size) {
         this.queue = (T[]) (new Object[size]);
@@ -65,7 +66,7 @@ public class CircularArrayQueue<T> implements QueueADT<T> {
     }
 
     /**
-     * 
+     * Expands the capacity of the circular queue when it is full.
      */
     private void expand() {
         T[] newQueue = (T[]) (new Object[queue.length * 2]);
@@ -97,9 +98,11 @@ public class CircularArrayQueue<T> implements QueueADT<T> {
     }
 
     /**
+     * Computes the circular index for a given index.
      * 
-     * @param index
-     * @return
+     * @param index the index to be adjusted.
+     * 
+     * @return the new circular index.
      */
     private int loop(int index) {
         return (index + 1) % queue.length;

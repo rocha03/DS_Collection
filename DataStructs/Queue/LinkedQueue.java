@@ -5,19 +5,22 @@ import Exceptions.EmptyCollectionException;
 import Interfaces.QueueADT;
 
 /**
- * 
+ * The LinkedQueue class implements a linked queue using linear nodes.
  */
 public class LinkedQueue<T> implements QueueADT<T> {
+
     /**
-     * 
+     * Reference to the front node of the queue.
      */
     private LinearNode<T> front;
+
     /**
-     * 
+     * Reference to the rear node of the queue.
      */
     private LinearNode<T> rear;
+
     /**
-     * 
+     * Count of elements in the queue.
      */
     private int count;
 

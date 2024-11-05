@@ -1,20 +1,27 @@
 package DataStructs.Nodes;
 
 /**
- * BinaryTreeNode represents a node in a binary tree with a left and
- * right child.
+ * BinaryTreeNode represents a node in a binary tree with a left and right child.
  */
 public class BinaryTreeNode<T> {
+
     /**
-     * 
+     * The element stored in this node.
      */
     private T element;
+
     /**
-     * 
+     * The left child of this node.
      */
     private BinaryTreeNode<T> left;
+<<<<<<< HEAD
     /**
      * 
+=======
+
+    /**
+     * The right child of this node.
+>>>>>>> 5bb1e3f2f8220477816c56019a90d5fc2e5badad
      */
     private BinaryTreeNode<T> right;
 
@@ -46,48 +53,54 @@ public class BinaryTreeNode<T> {
     }
 
     /**
+     * Returns the element stored in this node.
      * 
-     * @return
+     * @return the element stored in this node.
      */
     public T getElement() {
         return element;
     }
 
     /**
+     * Sets the element stored in this node.
      * 
-     * @param element
+     * @param element the new element to be stored in this node.
      */
     public void setElement(T element) {
         this.element = element;
     }
 
     /**
+     * Returns the left child of this node.
      * 
-     * @return
+     * @return the left child of this node.
      */
     public BinaryTreeNode<T> getLeft() {
         return left;
     }
 
     /**
+     * Sets the left child of this node.
      * 
-     * @param left
+     * @param left the new left child to be set.
      */
     public void setLeft(BinaryTreeNode<T> left) {
         this.left = left;
     }
 
     /**
+     * Returns the right child of this node.
      * 
-     * @return
+     * @return the right child of this node.
      */
     public BinaryTreeNode<T> getRight() {
         return right;
     }
 
     /**
+     * Sets the right child of this node.
      * 
-     * @param right
+     * @param right the new right child to be set.
      */
     public void setRight(BinaryTreeNode<T> right) {
         this.right = right;
