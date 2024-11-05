@@ -2,6 +2,7 @@ package DataStructs.List;
 
 import java.util.Iterator;
 
+import DataStructs.List.Iterators.ArrayIterator;
 import Exceptions.ElementNotFoundException;
 import Exceptions.EmptyCollectionException;
 import Interfaces.List.ListADT;
@@ -21,11 +22,15 @@ public abstract class ArrayList<T> implements ListADT<T> {
     /**
      * 
      */
-    private T[] list;
+    protected T[] list;
     /**
      * 
      */
-    private int count;
+    protected int count;
+    /**
+     * 
+     */
+    protected int modcount;
 
     /**
      * 
@@ -33,6 +38,7 @@ public abstract class ArrayList<T> implements ListADT<T> {
     public ArrayList() {
         this.list = (T[]) (new Object[DEFAULT]);
         this.count = 0;
+        this.modcount = 0;
     }
 
     /**
@@ -42,11 +48,15 @@ public abstract class ArrayList<T> implements ListADT<T> {
     public ArrayList(int size) {
         this.list = (T[]) (new Object[size]);
         this.count = 0;
+        this.modcount = 0;
     }
 
     @Override
     public boolean contains(T target) {
-        // TODO Auto-generated method stub
+        int i = 0;
+        while (i != size())
+            if (list[i++].equals(target))
+                return true;
         return false;
     }
 
@@ -71,8 +81,26 @@ public abstract class ArrayList<T> implements ListADT<T> {
 
     @Override
     public T remove(T element) throws EmptyCollectionException, ElementNotFoundException {
-        // TODO Auto-generated method stub
-        return null;
+        int index = find(element);
+        T removed = list[index]; // do i need this or can i just use element??
+        for (int i = index; i < count - 1; i++) {
+            list[i] = list[i + 1];
+        }
+        return removed;
+    }
+
+    /**
+     * 
+     * @param target
+     * @return
+     * @throws ElementNotFoundException
+     */
+    private int find(T target) throws ElementNotFoundException {
+        int i = 0;
+        while (i != size())
+            if (list[i++].equals(target))
+                return i;
+        throw new ElementNotFoundException("No such element in the list");
     }
 
     @Override
@@ -102,7 +130,6 @@ public abstract class ArrayList<T> implements ListADT<T> {
 
     @Override
     public Iterator<T> iterator() {
-        // TODO Auto-generated method stub
-        return null;
+        return new ArrayIterator<T>(list, count);
     }
 }

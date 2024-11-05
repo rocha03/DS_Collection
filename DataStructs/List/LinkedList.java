@@ -18,8 +18,13 @@ public abstract class LinkedList<T> implements ListADT<T> {
     }
 
     @Override
-    public boolean contains(T target) {
-        // TODO Auto-generated method stub
+    public boolean contains(T target) { // test this thing
+        LinearNode<T> current = head;
+        while (current.getNext() != null) {
+            if (current.getElement().equals(target))
+                return true;
+            current = current.getNext();
+        }
         return false;
     }
 
@@ -90,6 +95,6 @@ public abstract class LinkedList<T> implements ListADT<T> {
      * 
      */
     private class BasicIterator<E> {
-        
+
     }
 }
