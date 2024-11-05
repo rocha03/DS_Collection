@@ -1,5 +1,7 @@
 package Interfaces.List;
 
+import Exceptions.ElementNotFoundException;
+
 public interface UnorderedListADT<T> extends ListADT<T> {
     /**
      * Adds the specified element to the front of this list.
@@ -21,5 +23,5 @@ public interface UnorderedListADT<T> extends ListADT<T> {
      * @param element the element to be added after the target
      * @param target  the target is the item that the element will be added after
      */
-    public void addAfter(T element, T target);
+    public void addAfter(T element, T target) throws ElementNotFoundException;
 }

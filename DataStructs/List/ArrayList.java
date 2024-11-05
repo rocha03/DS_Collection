@@ -95,11 +95,13 @@ public abstract class ArrayList<T> implements ListADT<T> {
      * @return
      * @throws ElementNotFoundException
      */
-    private int find(T target) throws ElementNotFoundException {
+    protected int find(T target) throws ElementNotFoundException {
         int i = 0;
-        while (i != size())
-            if (list[i++].equals(target))
+        while (i != size()){
+            if (list[i].equals(target))
                 return i;
+            i++;
+        }
         throw new ElementNotFoundException("No such element in the list");
     }
 
@@ -131,5 +133,16 @@ public abstract class ArrayList<T> implements ListADT<T> {
     @Override
     public Iterator<T> iterator() {
         return new ArrayIterator<T>(list, count);
+    }
+
+    /**
+     * 
+     */
+    protected void expand(){
+        T[] newList = (T[]) (new Object[list.length * 2]);
+        for (int i = HEAD; i < list.length; i++) {
+            newList[i] = list[i];
+        }
+        this.list = newList;
     }
 }

@@ -17,7 +17,7 @@ public class ArrayStack<T> implements StackADT<T> {
      */
     private int top;
     /**
-     * Array of generic elements to represent the stack
+     * Array of generic elements to represent the stack.
      */
     private T[] stack;
 

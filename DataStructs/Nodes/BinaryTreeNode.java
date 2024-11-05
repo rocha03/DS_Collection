@@ -12,7 +12,11 @@ public class BinaryTreeNode<T> {
     /**
      * 
      */
-    private BinaryTreeNode<T> left, right;
+    private BinaryTreeNode<T> left;
+    /**
+     * 
+     */
+    private BinaryTreeNode<T> right;
 
     /**
      * Creates a new tree node with the specified data.
@@ -35,7 +39,7 @@ public class BinaryTreeNode<T> {
     public int numChildren() {
         int children = 0;
         if (left != null)
-            children = 1 + left.numChildren();
+            children = children + 1 + left.numChildren();
         if (right != null)
             children = children + 1 + right.numChildren();
         return children;
@@ -87,5 +91,27 @@ public class BinaryTreeNode<T> {
      */
     public void setRight(BinaryTreeNode<T> right) {
         this.right = right;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        BinaryTreeNode<?> other = (BinaryTreeNode<?>) obj;
+
+        if (element != null ? !element.equals(other.element) : other.element != null) {
+            return false;
+        }
+
+        boolean leftEquals = (left == null && other.left == null) || (left != null && left.equals(other.left));
+        boolean rightEquals = (right == null && other.right == null) || (right != null && right.equals(other.right));
+
+        return leftEquals && rightEquals;
     }
 }

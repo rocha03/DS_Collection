@@ -10,11 +10,25 @@ import Interfaces.List.ListADT;
  * 
  */
 public abstract class CircularArrayList<T> implements ListADT<T> {
-
+    /**
+     * 
+     */
     private static final int DEFAULT = 10;
+    /**
+     * 
+     */
     private T[] list;
+    /**
+     * 
+     */
     private int head;
-    private int tail;
+    /**
+     * 
+     */
+    private int tail;// add here
+    /**
+     * 
+     */
     private int count;
 
     /**
@@ -34,9 +48,35 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
         this.head = this.tail = this.count = 0;
     }
 
+    /**
+     * 
+     * @param index
+     * @return
+     */
+    protected int loop(int index) {
+        return (index + 1) % list.length;
+    }
+
+    /**
+     * 
+     * @param index
+     * @param forward
+     * @return
+     */
+    protected int loop(int index, boolean forward) {
+        if (forward)
+            return (index + 1) % list.length;
+        return (index - 1 + list.length) % list.length;
+    }
+
     @Override
     public boolean contains(T target) {
-        // TODO Auto-generated method stub
+        int i = head;
+        while (i != tail) {
+            if (list[i].equals(target))
+                return true;
+            i = loop(i);
+        }
         return false;
     }
 
@@ -77,8 +117,8 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
     public T removeLast() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("The list is empty. ");
-        // TODO Auto-generated method stub
-        return null;
+        loop(tail, false);
+        return list[tail];
     }
 
     @Override

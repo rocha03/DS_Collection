@@ -1,27 +1,39 @@
 package DataStructs.List.UnorderedList;
 
-import java.util.ArrayList;
-
+import DataStructs.List.ArrayList;
+import Exceptions.ElementNotFoundException;
 import Interfaces.List.UnorderedListADT;
 
+/**
+ * 
+ */
 public class ArrayUnorderedList<T> extends ArrayList<T> implements UnorderedListADT<T> {
 
     @Override
-    public void addAfter(Object element, Object target) {
-        // TODO Auto-generated method stub
-        
+    public void addAfter(T element, T target) throws ElementNotFoundException {
+        if (size() == list.length)
+            expand();
+        int position = find(target);
+        for (int i = position; i < size(); i++) 
+            list[i] = list[i +1];
+        list[position] = element;
     }
 
     @Override
-    public void addToFront(Object element) {
-        // TODO Auto-generated method stub
-        
+    public void addToFront(T element) {
+        if (size() == list.length)
+            expand();
+        for (int i = count; i > 0; i--)
+            list[i] = list[i - 1];
+        list[0] = element;
+        count++;
     }
 
     @Override
-    public void addToRear(Object element) {
-        // TODO Auto-generated method stub
-        
+    public void addToRear(T element) {
+        if (size() == list.length)
+            expand();
+        list[count++] = element;
     }
-    
+
 }
