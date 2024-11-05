@@ -8,11 +8,11 @@ import Interfaces.List.UnorderedListADT;
 import Interfaces.Tree.BinaryTreeADT;
 
 /**
- * LinkedBinaryTree implements the BinaryTreeADT interface
+ * LinkedBinaryTree implements the BinaryTreeADT interface.
  */
 public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
     /**
-     * Number of elements in the tree
+     * Number of elements in the tree.
      */
     private int count;
     /**
@@ -32,7 +32,7 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      * Creates a binary tree with the specified element as its root.
      *
      * @param element the element that will become the root of the
-     *                new binary tree
+     *                new binary tree.
      */
     public LinkedBinaryTree(T element) {
         count = 1;
@@ -63,8 +63,9 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      * Returns a reference to the specified target element if it is
      * found in this binary tree.
      *
-     * @param targetElement the element being sought in this tree
-     * @param next          the element to begin searching from
+     * @param targetElement the element being sought in this tree.
+     * 
+     * @param next          the element to begin searching from.
      */
     private BinaryTreeNode<T> findAgain(T targetElement, BinaryTreeNode<T> next) {
         if (next == null)
@@ -121,7 +122,8 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      * Performs a recursive inorder traversal.
      *
      * @param node     the node to be used as the root
-     *                 for this traversal
+     *                 for this traversal.
+     * 
      * @param tempList the temporary list for use in this traversal
      */
     protected void inorder(BinaryTreeNode<T> node, UnorderedListADT<T> tempList) {

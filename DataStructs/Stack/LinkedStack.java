@@ -5,7 +5,7 @@ import Exceptions.EmptyCollectionException;
 import Interfaces.StackADT;
 
 /**
- * 
+ * The LinkedStack class implements a stack using a linked list.
  */
 public class LinkedStack<T> implements StackADT<T> {
     /**

@@ -4,28 +4,28 @@ import Exceptions.EmptyCollectionException;
 import Interfaces.QueueADT;
 
 /**
- * 
+ * The ArrayQueue class implements a queue using an array.
  */
 public class ArrayQueue<T> implements QueueADT<T> {
     /**
-     * 
+     * Default capacity of the queue.
      */
     private static final int DEFAULT_CAPACITY = 100;
     /**
-     * 
+     * Index of the front of the queue.
      */
     private static final int FRONT = 0;
     /**
-     * 
+     * Array that stores the elements of the queue.
      */
     private T[] queue;
     /**
-     * 
+     * Index of the rear of the queue.
      */
     private int rear;
 
     /**
-     * 
+     * Creates a queue with the default capacity.
      */
     public ArrayQueue() {
         this.queue = (T[]) (new Object[DEFAULT_CAPACITY]);
@@ -33,8 +33,9 @@ public class ArrayQueue<T> implements QueueADT<T> {
     }
 
     /**
+     * Creates a queue with the specified capacity.
      * 
-     * @param size
+     * @param size the capacity of the queue.
      */
     public ArrayQueue(int size) {
         this.queue = (T[]) (new Object[size]);
@@ -61,7 +62,7 @@ public class ArrayQueue<T> implements QueueADT<T> {
     }
 
     /**
-     * 
+     * Expands the capacity of the queue when it is full.
      */
     private void expand() {
         T[] newQueue = (T[]) (new Object[queue.length * 2]);

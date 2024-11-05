@@ -6,23 +6,23 @@ import Exceptions.ElementNotFoundException;
 
 public interface BinaryTreeADT<T> {
     /**
-     * Returns a reference to the root element
+     * Returns a reference to the root element.
      *
-     * @return a reference to the root
+     * @return a reference to the root.
      */
     public T getRoot();
 
     /**
      * Returns true if this binary tree is empty and false otherwise.
      *
-     * @return true if this binary tree is empty
+     * @return true if this binary tree is empty.
      */
     public boolean isEmpty();
 
     /**
      * Returns the number of elements in this binary tree.
      *
-     * @return the integer number of elements in this tree
+     * @return the integer number of elements in this tree.
      */
     public int size();
 
@@ -30,8 +30,9 @@ public interface BinaryTreeADT<T> {
      * Returns true if the binary tree contains an element that
      * matches the specified element and false otherwise.
      *
-     * @param targetElement the element being sought in the tree
-     * @return true if the tree contains the target element
+     * @param targetElement the element being sought in the tree.
+     * 
+     * @return true if the tree contains the target element.
      */
     public boolean contains(T targetElement);
 
@@ -40,17 +41,19 @@ public interface BinaryTreeADT<T> {
      * this binary tree. Throws an exception if the specified element
      * is not found.
      *
-     * @param targetElement the element being sought in the tree
-     * @return a reference to the specified element
+     * @param targetElement the element being sought in the tree.
+     * 
+     * @return a reference to the specified element.
+     * 
      * @throws ElementNotFoundException if an element not found
-     *                                  exception occurs
+     *                                  exception occurs.
      */
     public T find(T targetElement) throws ElementNotFoundException;
 
     /**
      * Returns the string representation of the binary tree.
      *
-     * @return a string representation of the binary tree
+     * @return a string representation of the binary tree.
      */
     public String toString();
 
@@ -58,7 +61,7 @@ public interface BinaryTreeADT<T> {
      * Performs an inorder traversal on this binary tree by calling an
      * overloaded, recursive inorder method that starts with the root.
      *
-     * @return an iterator over the elements of this binary tree
+     * @return an iterator over the elements of this binary tree.
      */
     public Iterator<T> iteratorInOrder();
 
@@ -67,7 +70,7 @@ public interface BinaryTreeADT<T> {
      * overloaded, recursive preorder method that starts
      * with the root.
      *
-     * @return an iterator over the elements of this binary tree
+     * @return an iterator over the elements of this binary tree.
      */
     public Iterator<T> iteratorPreOrder();
 
@@ -76,7 +79,7 @@ public interface BinaryTreeADT<T> {
      * calling an overloaded, recursive postorder
      * method that starts with the root.
      *
-     * @return an iterator over the elements of this binary tree
+     * @return an iterator over the elements of this binary tree.
      */
     public Iterator<T> iteratorPostOrder();
 
@@ -84,7 +87,7 @@ public interface BinaryTreeADT<T> {
      * Performs a levelorder traversal on the binary tree,
      * using a queue.
      *
-     * @return an iterator over the elements of this binary tree
+     * @return an iterator over the elements of this binary tree.
      */
     public Iterator<T> iteratorLevelOrder();
 }
