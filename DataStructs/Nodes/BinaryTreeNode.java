@@ -14,14 +14,9 @@ public class BinaryTreeNode<T> {
      * The left child of this node.
      */
     private BinaryTreeNode<T> left;
-<<<<<<< HEAD
-    /**
-     * 
-=======
-
+    
     /**
      * The right child of this node.
->>>>>>> 5bb1e3f2f8220477816c56019a90d5fc2e5badad
      */
     private BinaryTreeNode<T> right;
 
