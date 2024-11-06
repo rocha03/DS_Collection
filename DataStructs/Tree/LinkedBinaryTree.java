@@ -68,10 +68,7 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      * found in this binary tree.
      *
      * @param targetElement the element being sought in this tree.
-<<<<<<< HEAD
-=======
      * 
->>>>>>> 5bb1e3f2f8220477816c56019a90d5fc2e5badad
      * @param next          the element to begin searching from.
      */
     private BinaryTreeNode<T> findAgain(T targetElement, BinaryTreeNode<T> next) {

@@ -1,7 +1,8 @@
 package DataStructs.Nodes;
 
 /**
- * BinaryTreeNode represents a node in a binary tree with a left and right child.
+ * BinaryTreeNode represents a node in a binary tree with a left and right
+ * child.
  */
 public class BinaryTreeNode<T> {
 
@@ -39,8 +40,6 @@ public class BinaryTreeNode<T> {
      * @return the integer number of non-null children of this node
      */
     public int numChildren() {
-        // int children = (left != null ? 1 + left.numChildren() : 0) + (right != ? 1 + right.numChildren() : 0);
-        //                 condição     ? valorSeVerdadeiro      : valorSeFalso
         int children = 0;
         if (left != null)
             children = children + 1 + left.numChildren();
@@ -105,19 +104,16 @@ public class BinaryTreeNode<T> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
+        if (this == obj)
             return true;
-        }
 
-        if (obj == null || getClass() != obj.getClass()) {
+        if (obj == null || getClass() != obj.getClass())
             return false;
-        }
 
         BinaryTreeNode<?> other = (BinaryTreeNode<?>) obj;
 
-        if (element != null ? !element.equals(other.element) : other.element != null) {
+        if (element != null ? !element.equals(other.element) : other.element != null)
             return false;
-        }
 
         boolean leftEquals = (left == null && other.left == null) || (left != null && left.equals(other.left));
         boolean rightEquals = (right == null && other.right == null) || (right != null && right.equals(other.right));
