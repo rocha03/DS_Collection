@@ -76,19 +76,16 @@ public class LinearNode<T> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
+        if (this == obj)
             return true;
-        }
         
-        if (obj == null || getClass() != obj.getClass()) {
+        if (obj == null || getClass() != obj.getClass())
             return false;
-        }
 
         LinearNode<?> other = (LinearNode<?>) obj;
 
-        if (element != null ? !element.equals(other.element) : other.element != null) {
+        if (element != null ? !element.equals(other.element) : other.element != null)
             return false;
-        }
         
         return (next == null && other.next == null) || (next != null && next.equals(other.next));
     }

@@ -37,6 +37,8 @@ public class LinkedQueue<T> implements QueueADT<T> {
         if (isEmpty())
             throw new EmptyCollectionException("Queue is empty.\n");
         T removed = front.getElement();
+
+        // front = (front == rear) ? (rear = null) : (front.getNext());
         if (front == rear) {
             front = rear = null;
         } else {
@@ -50,6 +52,7 @@ public class LinkedQueue<T> implements QueueADT<T> {
     public void enqueue(T element) {
         LinearNode<T> newNode = new LinearNode<T>(element);
 
+        
         if (isEmpty()) {
             front = rear = newNode;
         } else {
