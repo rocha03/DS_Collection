@@ -173,14 +173,9 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      *
      * @param node     the node to be used as the root
      *                 for this traversal.
-<<<<<<< HEAD
      * @param tempList the temporary list for use in this traversal.
-=======
-     * 
-     * @param tempList the temporary list for use in this traversal
->>>>>>> 5bb1e3f2f8220477816c56019a90d5fc2e5badad
      */
-    protected void inorder(BinaryTreeNode<T> node, UnorderedListADT<T> tempList) {
+     protected void inorder(BinaryTreeNode<T> node, UnorderedListADT<T> tempList) {
         if (node != null) {
             inorder(node.getLeft(), tempList);
             tempList.addToRear(node.getElement());
