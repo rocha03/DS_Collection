@@ -3,6 +3,7 @@ package DataStructs.List;
 import java.util.Iterator;
 
 import DataStructs.List.Iterators.ArrayIterator;
+import DataStructs.List.Iterators.ModCount;
 import Exceptions.ElementNotFoundException;
 import Exceptions.EmptyCollectionException;
 import Interfaces.List.ListADT;
@@ -27,10 +28,11 @@ public abstract class ArrayList<T> implements ListADT<T> {
      * 
      */
     protected int count;
+
     /**
-     * 
+     * ModCount instance for tracking structural modifications.
      */
-    protected int modcount;
+    protected final ModCount modCount = new ModCount();
 
     /**
      * 
@@ -38,7 +40,6 @@ public abstract class ArrayList<T> implements ListADT<T> {
     public ArrayList() {
         this.list = (T[]) (new Object[DEFAULT]);
         this.count = 0;
-        this.modcount = 0;
     }
 
     /**
@@ -48,7 +49,6 @@ public abstract class ArrayList<T> implements ListADT<T> {
     public ArrayList(int size) {
         this.list = (T[]) (new Object[size]);
         this.count = 0;
-        this.modcount = 0;
     }
 
     @Override
@@ -82,10 +82,11 @@ public abstract class ArrayList<T> implements ListADT<T> {
     @Override
     public T remove(T element) throws EmptyCollectionException, ElementNotFoundException {
         int index = find(element);
-        T removed = list[index]; // do i need this or can i just use element??
+        T removed = list[index];
         for (int i = index; i < count - 1; i++) {
             list[i] = list[i + 1];
         }
+        modCount.increment();
         return removed;
     }
 
@@ -114,6 +115,7 @@ public abstract class ArrayList<T> implements ListADT<T> {
             list[i] = list[i + 1];
         }
         count--;
+        modCount.increment();
         return removed;
     }
 
@@ -122,6 +124,7 @@ public abstract class ArrayList<T> implements ListADT<T> {
         if (isEmpty())
             throw new EmptyCollectionException("The list is empty. ");
         count--;
+        modCount.increment();
         return list[count];
     }
 
@@ -132,7 +135,7 @@ public abstract class ArrayList<T> implements ListADT<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new ArrayIterator<T>(list, count);
+        return new ArrayIterator<T>(list, count, modCount);
     }
 
     /**

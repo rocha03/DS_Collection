@@ -17,6 +17,8 @@ public class ArrayUnorderedList<T> extends ArrayList<T> implements UnorderedList
         for (int i = position; i < size(); i++) 
             list[i] = list[i +1];
         list[position] = element;
+        count++;
+        modCount.increment();
     }
 
     @Override
@@ -27,6 +29,7 @@ public class ArrayUnorderedList<T> extends ArrayList<T> implements UnorderedList
             list[i] = list[i - 1];
         list[0] = element;
         count++;
+        modCount.increment();
     }
 
     @Override
@@ -34,6 +37,7 @@ public class ArrayUnorderedList<T> extends ArrayList<T> implements UnorderedList
         if (size() == list.length)
             expand();
         list[count++] = element;
+        modCount.increment();
     }
 
 }

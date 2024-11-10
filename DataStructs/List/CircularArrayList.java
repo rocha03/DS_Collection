@@ -3,6 +3,7 @@ package DataStructs.List;
 import java.util.Iterator;
 
 import DataStructs.List.Iterators.ArrayIterator;
+import DataStructs.List.Iterators.ModCount;
 import Exceptions.ElementNotFoundException;
 import Exceptions.EmptyCollectionException;
 import Interfaces.List.ListADT;
@@ -31,6 +32,11 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
      * 
      */
     private int count;
+
+    /**
+     * ModCount instance for tracking structural modifications.
+     */
+    protected final ModCount modCount = new ModCount();
 
     /**
      * 
@@ -117,6 +123,8 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
             list[j] = list[loop(j)];
             j = loop(j);
         }
+        count--;
+        modCount.increment();
         return removed;
     }
 
@@ -127,6 +135,7 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
         T removed = list[head];
         head = loop(head);
         count--;
+        modCount.increment();
         return removed;
     }
 
@@ -136,6 +145,7 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
             throw new EmptyCollectionException("The list is empty. ");
         tail = loop(tail, false);
         count--;
+        modCount.increment();
         return list[tail];
     }
 
@@ -152,6 +162,6 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
             tempList[i] = list[j];
             j = loop(j);
         }
-        return new ArrayIterator<T>(tempList, count);
+        return new ArrayIterator<T>(tempList, count, modCount);
     }
 }
