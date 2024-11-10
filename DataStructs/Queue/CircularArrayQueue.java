@@ -112,7 +112,7 @@ public class CircularArrayQueue<T> implements QueueADT<T> {
     public String toString() {
         String result = "Queue Front to Rear:\nNumber of elements: " + rear + "\n--START--\n";
         int j = front;
-        for (int i = front; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             result = result + queue[j].toString() + "\n";
             j = loop(j);
         }

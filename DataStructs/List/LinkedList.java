@@ -2,19 +2,36 @@ package DataStructs.List;
 
 import java.util.Iterator;
 
+import DataStructs.List.Iterators.LinkedIterator;
 import DataStructs.Nodes.LinearNode;
 import Exceptions.ElementNotFoundException;
 import Exceptions.EmptyCollectionException;
 import Interfaces.List.ListADT;
 
+/**
+ * 
+ */
 public abstract class LinkedList<T> implements ListADT<T> {
-
+    /**
+     * 
+     */
     private int count;
+    /**
+     * 
+     */
     private LinearNode<T> head;
+    /**
+     * 
+     */
+    private LinearNode<T> tail;
 
+    /**
+     * 
+     */
     public LinkedList() {
         this.count = 0;
         this.head = null;
+        this.tail = null;
     }
 
     @Override
@@ -37,17 +54,14 @@ public abstract class LinkedList<T> implements ListADT<T> {
 
     @Override
     public boolean isEmpty() {
-        return count == 0;
+        return size() == 0;
     }
 
     @Override
     public T last() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("The list is empty. ");
-        LinearNode<T> current = head;
-        while (current.getNext() != null)
-            current = current.getNext();
-        return current.getElement();
+        return tail.getElement();
     }
 
     @Override
@@ -87,14 +101,6 @@ public abstract class LinkedList<T> implements ListADT<T> {
 
     @Override
     public Iterator<T> iterator() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * 
-     */
-    private class BasicIterator<E> {
-
+        return new LinkedIterator<>(head, 0);
     }
 }

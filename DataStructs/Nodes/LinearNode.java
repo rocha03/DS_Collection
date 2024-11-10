@@ -4,17 +4,14 @@ package DataStructs.Nodes;
  * LinearNode represents a node in a linear list.
  */
 public class LinearNode<T> {
-
     /**
      * Reference to next node in list.
      */
     private LinearNode<T> next;
-
     /**
      * Element stored at this node.
      */
     private T element;
-
     /**
      * Creates an empty node.
      */

@@ -2,6 +2,7 @@ package DataStructs.List;
 
 import java.util.Iterator;
 
+import DataStructs.List.Iterators.ArrayIterator;
 import Exceptions.ElementNotFoundException;
 import Exceptions.EmptyCollectionException;
 import Interfaces.List.ListADT;
@@ -101,23 +102,40 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
 
     @Override
     public T remove(T element) throws EmptyCollectionException, ElementNotFoundException {
-        // TODO Auto-generated method stub
-        return null;
+        int j = head, i = 0;
+        boolean found = false;
+        while (i < count && !found) {
+            if (list[j].equals(element)) {
+                found = true;
+            } else {
+                j = loop(j);
+                i++;
+            }
+        }
+        T removed = list[j];
+        for (int k = i; k < count - 1; k++) {
+            list[j] = list[loop(j)];
+            j = loop(j);
+        }
+        return removed;
     }
 
     @Override
     public T removeFirst() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("The list is empty. ");
-        // TODO Auto-generated method stub
-        return null;
+        T removed = list[head];
+        head = loop(head);
+        count--;
+        return removed;
     }
 
     @Override
     public T removeLast() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("The list is empty. ");
-        loop(tail, false);
+        tail = loop(tail, false);
+        count--;
         return list[tail];
     }
 
@@ -128,7 +146,12 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
 
     @Override
     public Iterator<T> iterator() {
-        // TODO Auto-generated method stub
-        return null;
+        T[] tempList = (T[]) (new Object[count]);
+        int j = head;
+        for (int i = 0; i < count; i++) {
+            tempList[i] = list[j];
+            j = loop(j);
+        }
+        return new ArrayIterator<T>(tempList, count);
     }
 }

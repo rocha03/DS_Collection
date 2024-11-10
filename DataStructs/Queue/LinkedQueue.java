@@ -38,12 +38,8 @@ public class LinkedQueue<T> implements QueueADT<T> {
             throw new EmptyCollectionException("Queue is empty.\n");
         T removed = front.getElement();
 
-        // front = (front == rear) ? (rear = null) : (front.getNext());
-        if (front == rear) {
-            front = rear = null;
-        } else {
-            front = front.getNext();
-        }
+        front = (front == rear) ? (rear = null) : (front.getNext());
+        
         count--;
         return removed;
     }

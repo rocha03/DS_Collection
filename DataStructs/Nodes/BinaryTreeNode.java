@@ -5,12 +5,10 @@ package DataStructs.Nodes;
  * child.
  */
 public class BinaryTreeNode<T> {
-
     /**
      * The element stored in this node.
      */
     private T element;
-
     /**
      * The left child of this node.
      */
@@ -99,6 +97,11 @@ public class BinaryTreeNode<T> {
      */
     public void setRight(BinaryTreeNode<T> right) {
         this.right = right;
+    }
+
+    @Override
+    public String toString() {
+        return "BinaryTreeNode [element=" + element + "]";
     }
 
     @Override
