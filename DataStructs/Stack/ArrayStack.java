@@ -39,7 +39,6 @@ public class ArrayStack<T> implements StackADT<T> {
         stack = (T[]) (new Object[initialCapacity]);
     }
 
-    // do I have to put javadoc on implemented methods?
     @Override
     public boolean isEmpty() {
         return size() == 0;

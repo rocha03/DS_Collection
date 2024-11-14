@@ -2,23 +2,46 @@ package DataStructs.List;
 
 import java.util.Iterator;
 
+import DataStructs.List.Iterators.LinkedIterator;
+import DataStructs.List.Iterators.ModCount;
 import DataStructs.Nodes.LinearNode;
 import Exceptions.ElementNotFoundException;
 import Exceptions.EmptyCollectionException;
 import Interfaces.List.ListADT;
 
+/**
+ * 
+ */
 public abstract class LinkedList<T> implements ListADT<T> {
-
+    /**
+     * Tracks the number of elements in the list.
+     */
     private int count;
+    /**
+     * 
+     */
     private LinearNode<T> head;
+    /**
+     * 
+     */
+    private LinearNode<T> tail;
 
+    /**
+     * ModCount instance for tracking structural modifications.
+     */
+    protected final ModCount modCount = new ModCount();
+
+    /**
+     * 
+     */
     public LinkedList() {
         this.count = 0;
         this.head = null;
+        this.tail = null;
     }
 
     @Override
-    public boolean contains(T target) { // test this thing
+    public boolean contains(T target) {
         LinearNode<T> current = head;
         while (current.getNext() != null) {
             if (current.getElement().equals(target))
@@ -37,34 +60,60 @@ public abstract class LinkedList<T> implements ListADT<T> {
 
     @Override
     public boolean isEmpty() {
-        return count == 0;
+        return size() == 0;
     }
 
     @Override
     public T last() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("The list is empty. ");
-        LinearNode<T> current = head;
-        while (current.getNext() != null)
-            current = current.getNext();
-        return current.getElement();
+        return tail.getElement();
     }
 
     @Override
     public T remove(T element) throws EmptyCollectionException, ElementNotFoundException {
         if (isEmpty())
             throw new EmptyCollectionException("The list is empty. ");
-        // TODO Auto-generated method stub
-        return null;
+        LinearNode<T> current = head;
+        LinearNode<T> previous = null;
+
+        while (current != null) {
+            if (current.getElement().equals(element)) {
+                if (previous == null) {
+                    // Element is at the head
+                    head = current.getNext();
+                    if (head == null)
+                        tail = null;
+                } else {
+                    // Element is somewhere else in the list
+                    // Skip the current
+                    previous.setNext(current.getNext());
+                    // If the element is at the tail
+                    if (current.getNext() == null) {
+                        tail = previous;
+                    }
+                }
+                count--;
+                modCount.increment();
+                return current.getElement();
+            }
+
+            previous = current;
+            current = current.getNext();
+        }
+
+        throw new ElementNotFoundException("Element not found in the list. ");
     }
 
     @Override
     public T removeFirst() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("The list is empty. ");
+        T removed = head.getElement();
         head = head.getNext();
         count--;
-        return head.getElement();
+        modCount.increment();
+        return removed;
     }
 
     @Override
@@ -77,6 +126,7 @@ public abstract class LinkedList<T> implements ListADT<T> {
         T removed = current.getNext().getElement();
         current.setNext(null);
         count--;
+        modCount.increment();
         return removed;
     }
 
@@ -87,14 +137,6 @@ public abstract class LinkedList<T> implements ListADT<T> {
 
     @Override
     public Iterator<T> iterator() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * 
-     */
-    private class BasicIterator<E> {
-
+        return new LinkedIterator<>(head, modCount);
     }
 }
