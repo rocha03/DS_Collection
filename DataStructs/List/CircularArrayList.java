@@ -166,4 +166,19 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
         }
         return new ArrayIterator<T>(tempList, count, modCount);
     }
+
+    /**
+     * Expands the array when full, preserving element order.
+     */
+    protected void expand() {
+        T[] newList = (T[]) new Object[list.length * 2];
+        int currentIndex = head;
+        for (int i = 0; i < count; i++) {
+            newList[i] = list[currentIndex];
+            currentIndex = loop(currentIndex);
+        }
+        list = newList;
+        head = 0;
+        tail = count;
+    }
 }

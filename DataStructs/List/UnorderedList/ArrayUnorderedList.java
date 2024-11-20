@@ -9,6 +9,21 @@ import Interfaces.List.UnorderedListADT;
  */
 public class ArrayUnorderedList<T> extends ArrayList<T> implements UnorderedListADT<T> {
 
+    /**
+     * 
+     */
+    public ArrayUnorderedList(){
+        super();
+    }
+
+    /**
+     * 
+     * @param size
+     */
+    public ArrayUnorderedList(int size){
+        super(size);
+    }
+
     @Override
     public void addAfter(T element, T target) throws ElementNotFoundException {
         if (size() == list.length)
