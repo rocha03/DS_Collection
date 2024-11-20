@@ -1,4 +1,4 @@
-package DataStructs.Nodes;
+package DataStructs.Nodes.ListNodes;
 
 /**
  * LinearNode represents a node in a linear list.

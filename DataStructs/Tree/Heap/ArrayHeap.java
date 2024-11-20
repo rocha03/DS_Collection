@@ -1,5 +1,6 @@
-package DataStructs.Tree;
+package DataStructs.Tree.Heap;
 
+import DataStructs.Tree.ArrayBinaryTree;
 import Interfaces.Tree.HeapADT;
 
 /**

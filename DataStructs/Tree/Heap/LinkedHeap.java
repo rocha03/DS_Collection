@@ -1,4 +1,4 @@
-package DataStructs.Heap;
+package DataStructs.Tree.Heap;
 
 import DataStructs.Nodes.HeapNode;
 import DataStructs.Tree.LinkedBinaryTree;

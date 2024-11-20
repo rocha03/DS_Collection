@@ -1,6 +1,6 @@
 package DataStructs.Queue;
 
-import DataStructs.Nodes.LinearNode;
+import DataStructs.Nodes.ListNodes.LinearNode;
 import Exceptions.EmptyCollectionException;
 import Interfaces.QueueADT;
 

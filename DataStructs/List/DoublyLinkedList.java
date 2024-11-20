@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import DataStructs.List.Iterators.LinkedIterator;
 import DataStructs.List.Iterators.ModCount;
-import DataStructs.Nodes.DoubleNode;
+import DataStructs.Nodes.ListNodes.DoubleNode;
 import Exceptions.ElementNotFoundException;
 import Exceptions.EmptyCollectionException;
 import Interfaces.List.ListADT;

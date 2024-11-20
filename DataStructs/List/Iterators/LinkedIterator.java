@@ -4,7 +4,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import DataStructs.Nodes.BasicNode;
+import DataStructs.Nodes.ListNodes.BasicNode;
 
 /**
  * 

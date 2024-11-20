@@ -1,7 +1,7 @@
 package DataStructs.List.UnorderedList;
 
 import DataStructs.List.LinkedList;
-import DataStructs.Nodes.LinearNode;
+import DataStructs.Nodes.ListNodes.LinearNode;
 import Exceptions.ElementNotFoundException;
 import Interfaces.List.UnorderedListADT;
 

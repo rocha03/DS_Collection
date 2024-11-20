@@ -1,4 +1,4 @@
-package DataStructs.Nodes;
+package DataStructs.Nodes.ListNodes;
 
 /**
  * DoubleNode represents a node in a doubly linked list.

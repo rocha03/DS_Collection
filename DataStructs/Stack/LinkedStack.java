@@ -1,6 +1,6 @@
 package DataStructs.Stack;
 
-import DataStructs.Nodes.LinearNode;
+import DataStructs.Nodes.ListNodes.LinearNode;
 import Exceptions.EmptyCollectionException;
 import Interfaces.StackADT;
 

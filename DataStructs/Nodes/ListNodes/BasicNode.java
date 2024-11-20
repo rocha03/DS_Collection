@@ -1,4 +1,4 @@
-package DataStructs.Nodes;
+package DataStructs.Nodes.ListNodes;
 
 /**
  * 
