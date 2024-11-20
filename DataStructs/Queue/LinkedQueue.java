@@ -47,7 +47,6 @@ public class LinkedQueue<T> implements QueueADT<T> {
     @Override
     public void enqueue(T element) {
         LinearNode<T> newNode = new LinearNode<T>(element);
-
         
         if (isEmpty()) {
             front = rear = newNode;

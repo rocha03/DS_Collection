@@ -8,14 +8,17 @@ import java.util.Iterator;
  * 
  */
 public class ArrayIterator<T> implements Iterator<T> {
+
     /**
      * 
      */
     private T[] list;
+
     /**
      * 
      */
     private int count;
+
     /**
      * 
      */

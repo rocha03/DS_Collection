@@ -12,10 +12,12 @@ import Interfaces.List.ListADT;
  * 
  */
 public abstract class CircularArrayList<T> implements ListADT<T> {
+
     /**
      * 
      */
     private static final int DEFAULT = 10;
+
     /**
      * 
      */

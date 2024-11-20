@@ -12,18 +12,22 @@ import Interfaces.List.ListADT;
  * 
  */
 public abstract class ArrayList<T> implements ListADT<T> {
+
     /**
      * 
      */
     private static final int DEFAULT = 10;
+
     /**
      * 
      */
     private static final int HEAD = 0;
+
     /**
      * 
      */
     protected T[] list;
+
     /**
      * 
      */
