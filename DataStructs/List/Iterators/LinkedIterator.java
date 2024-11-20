@@ -37,13 +37,13 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
 
     @Override
     public boolean hasNext() {
-        checkForComodification();
+        checkForCoModification();
         return node.getNext() != null;
     }
 
     @Override
     public T next() {
-        checkForComodification();
+        checkForCoModification();
         if (!hasNext()) throw new NoSuchElementException();
         T prev = node.getElement();
         node = node.getNext();
@@ -61,7 +61,7 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
      * 
      * @throws ConcurrentModificationException if the modCounts differ.
      */
-    private void checkForComodification() {
+    private void checkForCoModification() {
         if (expectedModCount != modCount.value) {
             throw new ConcurrentModificationException();
         }

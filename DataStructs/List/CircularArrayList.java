@@ -19,19 +19,19 @@ public abstract class CircularArrayList<T> implements ListADT<T> {
     /**
      * 
      */
-    private T[] list;
+    protected T[] list;
     /**
      * 
      */
-    private int head;
+    protected int head;
     /**
      * 
      */
-    private int tail;// add here
+    protected int tail;// add here
     /**
      * 
      */
-    private int count;
+    protected int count;
 
     /**
      * ModCount instance for tracking structural modifications.

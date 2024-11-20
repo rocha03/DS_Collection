@@ -16,15 +16,15 @@ public abstract class LinkedList<T> implements ListADT<T> {
     /**
      * Tracks the number of elements in the list.
      */
-    private int count;
+    protected int count;
     /**
      * 
      */
-    private LinearNode<T> head;
+    protected LinearNode<T> head;
     /**
      * 
      */
-    private LinearNode<T> tail;
+    protected LinearNode<T> tail;
 
     /**
      * ModCount instance for tracking structural modifications.
