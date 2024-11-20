@@ -10,7 +10,7 @@ import Interfaces.Tree.BinaryTreeADT;
 /**
  * ArrayBinaryTree implements the BinaryTreeADT interface.
  */
-public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
+public abstract class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
     /**
      * Constant to represent the default capacity of the array.
      */

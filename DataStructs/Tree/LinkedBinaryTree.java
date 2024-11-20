@@ -14,15 +14,15 @@ import Interfaces.Tree.BinaryTreeADT;
 /**
  * LinkedBinaryTree implements the BinaryTreeADT interface.
  */
-public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
+public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
     /**
      * Number of elements in the tree.
      */
-    private int count;
+    protected int count;
     /**
      * Root element form the tree.
      */
-    private BinaryTreeNode<T> root;
+    protected BinaryTreeNode<T> root;
 
     /**
      * Creates an empty binary tree.
