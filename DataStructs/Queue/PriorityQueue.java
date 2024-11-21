@@ -1,11 +1,13 @@
 package DataStructs.Queue;
 
+import DataStructs.Nodes.PriorityQueueNode;
+import DataStructs.Tree.Heap.ArrayHeap;
+
 /**
  * PriorityQueue demonstrates a priority queue using a Heap.
  *
  */
-public class PriorityQueue<T> extends
-        ArrayHeap<PriorityQueueNode<T>> {
+public class PriorityQueue<T> extends ArrayHeap<PriorityQueueNode<T>> {
     /**
      * Creates an empty priority queue.
      */
