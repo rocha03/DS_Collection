@@ -4,8 +4,11 @@ import DataStructs.Nodes.PriorityQueueNode;
 import DataStructs.Tree.Heap.ArrayHeap;
 
 /**
- * PriorityQueue demonstrates a priority queue using a Heap.
+ * PriorityQueue demonstrates a priority queue using a min-heap.
+ * Elements are dequeued based on their priority, where the smallest
+ * priority value is served first.
  *
+ * @param <T> the type of elements in the priority queue
  */
 public class PriorityQueue<T> extends ArrayHeap<PriorityQueueNode<T>> {
     /**
@@ -20,10 +23,14 @@ public class PriorityQueue<T> extends ArrayHeap<PriorityQueueNode<T>> {
      *
      * @param object   the element to be added to the priority queue
      * @param priority the integer priority of the element to be added
+     *                 (lower values indicate higher priority).
      */
     public void addElement(T object, int priority) {
+        if (priority < 0) {
+            throw new IllegalArgumentException("Priority must be non-negative.");
+        }
         PriorityQueueNode<T> node = new PriorityQueueNode<T>(object, priority);
-        super.addElement(node);
+        super.addElement(node); // Delegate to ArrayHeap's addElement
     }
 
     /**
@@ -34,7 +41,10 @@ public class PriorityQueue<T> extends ArrayHeap<PriorityQueueNode<T>> {
      *         in this queue
      */
     public T removeNext() {
-        PriorityQueueNode<T> temp = (PriorityQueueNode<T>) super.removeMin();
-        return temp.getElement();
+        if (isEmpty()) {
+            throw new IllegalStateException("Priority queue is empty.");
+        }
+        PriorityQueueNode<T> temp = super.removeMin(); // Remove the node with the smallest priority
+        return temp.getElement(); // Return only the element, not the priority
     }
 }

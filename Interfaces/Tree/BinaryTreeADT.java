@@ -4,6 +4,12 @@ import java.util.Iterator;
 
 import Exceptions.ElementNotFoundException;
 
+/**
+ * Defines the interface for a Binary Tree Abstract Data Type (ADT).
+ * Provides core operations and various traversal mechanisms for a binary tree.
+ *
+ * @param <T> the type of elements held in this binary tree
+ */
 public interface BinaryTreeADT<T> {
     /**
      * Returns a reference to the root element.
@@ -37,57 +43,48 @@ public interface BinaryTreeADT<T> {
     public boolean contains(T targetElement);
 
     /**
-     * Returns a reference to the specified element if it is found in
-     * this binary tree. Throws an exception if the specified element
-     * is not found.
+     * RFinds and returns a reference to the specified element in this binary tree.
      *
      * @param targetElement the element being sought in the tree.
-     * 
      * @return a reference to the specified element.
-     * 
-     * @throws ElementNotFoundException if an element not found
-     *                                  exception occurs.
+     * @throws ElementNotFoundException if the specified element not found.
      */
     public T find(T targetElement) throws ElementNotFoundException;
 
     /**
      * Returns the string representation of the binary tree.
+     * The format and details of the representation are implementation-specific.
      *
      * @return a string representation of the binary tree.
      */
+    @Override
     public String toString();
 
     /**
-     * Performs an inorder traversal on this binary tree by calling an
-     * overloaded, recursive inorder method that starts with the root.
+     * Performs an in-order traversal of the tree and returns an iterator over its elements.
      *
-     * @return an iterator over the elements of this binary tree.
+     * @return an iterator for an in-order traversal of the tree
      */
     public Iterator<T> iteratorInOrder();
 
     /**
-     * Performs a preorder traversal on this binary tree by calling an
-     * overloaded, recursive preorder method that starts
-     * with the root.
+     * Performs a pre-order traversal of the tree and returns an iterator over its elements.
      *
-     * @return an iterator over the elements of this binary tree.
+     * @return an iterator for a pre-order traversal of the tree
      */
     public Iterator<T> iteratorPreOrder();
 
     /**
-     * Performs a postorder traversal on this binary tree by
-     * calling an overloaded, recursive postorder
-     * method that starts with the root.
+     * Performs a post-order traversal of the tree and returns an iterator over its elements.
      *
-     * @return an iterator over the elements of this binary tree.
+     * @return an iterator for a post-order traversal of the tree
      */
     public Iterator<T> iteratorPostOrder();
 
     /**
-     * Performs a levelorder traversal on the binary tree,
-     * using a queue.
+     * Performs a level-order traversal of the tree and returns an iterator over its elements.
      *
-     * @return an iterator over the elements of this binary tree.
+     * @return an iterator for a level-order traversal of the tree
      */
     public Iterator<T> iteratorLevelOrder();
 }
