@@ -6,7 +6,7 @@ import Exceptions.ElementNotFoundException;
 import Interfaces.Tree.SearchTree.BinarySearchTreeADT;
 
 /**
- * 
+ * A LinkedBinarySearchTree class implementing a Binary Search Tree (BST).
  */
 public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements BinarySearchTreeADT<T> {
     /**
@@ -75,37 +75,55 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
     public T removeElement(T targetElement) throws ElementNotFoundException {
         T result = null;
         if (!isEmpty()) {
-            if (((Comparable) targetElement).equals(root.element)) {
-                result = root.element;
+            // if (((Comparable) targetElement).equals(root.element)) {
+            // result = root.element;
+            if (((Comparable) targetElement).equals(root.getElement())) {
+                result = root.getElement();
                 root = replacement(root);
                 count--;
-            }
-
-            else {
+            } else {
                 BinaryTreeNode<T> current, parent = root;
                 boolean found = false;
-                if (((Comparable) targetElement).compareTo(root.element) < 0)
-                    current = root.left;
+                // if (((Comparable) targetElement).compareTo(root.element) < 0)
+                if (((Comparable) targetElement).compareTo(root.getElement()) < 0)
+                    // current = root.left;
+                    current = root.getLeft();
                 else
-                    current = root.right;
+                    // current = root.right;
+                    current = root.getRight();
                 while (current != null && !found) {
-                    if (targetElement.equals(current.element)) {
+                    // if (targetElement.equals(current.element)) {
+                    if (targetElement.equals(current.getElement())) {
                         found = true;
                         count--;
-                        result = current.element;
-                        if (current == parent.left) {
-                            parent.left = replacement(current);
+                        // result = current.element;
+                        result = current.getElement();
+                        // if (current == parent.left) {
+                        if (current == parent.getLeft()) {
+                            parent.setLeft(replacement(current));
+                            // parent.left = replacement(current);
                         }
 
                         else {
-                            parent.right = replacement(current);
+                            parent.setRight(replacement(current));
+                            // parent.right = replacement(current);
                         }
                     } else {
                         parent = current;
-                        if (((Comparable) targetElement).compareTo(current.element) < 0)
-                            current = current.left;
+                        // if (((Comparable) targetElement).compareTo(current.element) < 0)
+                        if (((Comparable) targetElement).compareTo(current.getElement()) < 0)
+                            // current = current.left;
+                            current = current.getLeft();
                         else
-                            current = current.right;
+                            // current = current.right;
+                            current = current.getRight();
+                        /*
+                         * current = (
+                         * (((Comparable) targetElement).compareTo(current.getElement()) < 0) ?
+                         * current.getLeft() : current.getRight()
+                         * );
+                         */
+
                     }
                 } // while
                 if (!found)
@@ -125,26 +143,25 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
      */
     protected BinaryTreeNode<T> replacement(BinaryTreeNode<T> node) {
         BinaryTreeNode<T> result = null;
-        if ((node.left == null) && (node.right == null))
-            result = null;
-        else if ((node.left != null) && (node.right == null))
-            result = node.left;
-        else if ((node.left == null) && (node.right != null))
-            result = node.right;
-
-        else {
-            BinaryTreeNode<T> current = node.right;
+        if ((node.getLeft() == null) && (node.getRight() == null)) {
+            return null;
+        } else if (node.getLeft() == null) {
+            return node.getRight();
+        } else if (node.getRight() == null) {
+            return node.getLeft();
+        } else {
+            BinaryTreeNode<T> current = node.getRight();
             BinaryTreeNode<T> parent = node;
-            while (current.left != null) {
+            while (current.getLeft() != null) {
                 parent = current;
-                current = current.left;
+                current = current.getLeft();
             }
-            if (node.right == current)
-                current.left = node.left;
+            if (node.getRight() == current)
+                current.setLeft(node.getLeft());
             else {
-                parent.left = current.right;
-                current.right = node.right;
-                current.left = node.left;
+                parent.setLeft(current.getRight());
+                current.setRight(node.getRight());
+                current.setLeft(node.getLeft());
             }
             result = current;
         }
@@ -159,25 +176,76 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
 
     @Override
     public T removeMin() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeMin'");
+        if (isEmpty()) {
+            return null;
+        }
+
+        BinaryTreeNode<T> current = root;
+        BinaryTreeNode<T> parent = null;
+
+        while (current.getLeft() != null) {
+            parent = current;
+            current = current.getLeft();
+        }
+
+        if (parent == null) { // root node is the minimum
+            root = root.getRight();
+        } else {
+            parent.setLeft(current.getRight());
+        }
+
+        count--;
+        return current.getElement();
     }
 
     @Override
     public T removeMax() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeMax'");
+        if (isEmpty()) {
+            return null;
+        }
+
+        BinaryTreeNode<T> current = root;
+        BinaryTreeNode<T> parent = null;
+
+        while (current.getRight() != null) {
+            parent = current;
+            current = current.getRight();
+        }
+
+        if (parent == null) { // root node is the maximum
+            root = root.getLeft();
+        } else {
+            parent.setRight(current.getLeft());
+        }
+
+        count--;
+        return current.getElement();
     }
 
     @Override
     public T findMin() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findMin'");
+        if (isEmpty()) {
+            return null;
+        }
+
+        BinaryTreeNode<T> current = root;
+        while (current.getLeft() != null) {
+            current = current.getLeft();
+        }
+        return current.getElement();
     }
 
     @Override
     public T findMax() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findMax'");
+        if (isEmpty()) {
+            return null;
+        }
+
+        BinaryTreeNode<T> current = root;
+        while (current.getRight() != null) {
+            current = current.getRight();
+        }
+
+        return current.getElement();
     }
 }

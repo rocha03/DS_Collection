@@ -17,8 +17,8 @@ public class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT<T> {
     public void addElement(T element){
         // Implementação do método para inserir elementos no heap
         if (count == size())
-            extends();
-        tree[count] = obj;
+            //extends();
+        tree[count] = element;
         count++;
 
         if (count > 1)
@@ -50,12 +50,11 @@ public class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT<T> {
             next = count;
         else if (tree[left] == null)
             next = right;
-        else if (tree[right] == null)
-            next = left;
-        else if (((Comparable) tree[left]).compareTo(tree[right]) < 0)
+        else if ((tree[right] == null) || (((Comparable) tree[left]).compareTo(tree[right]) < 0))
             next = left;
         else
             next = right;
+
         while ((next < count) && (((Comparable) tree[next]).compareTo(tree[node]) < 0)) {
             temp = tree[node];
             tree[node] = tree[next];
