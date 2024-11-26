@@ -51,11 +51,7 @@ public class ArrayHeap<T extends Comparable<T>> extends ArrayBinaryTree<T> imple
     }
 
     private void heapifyRemove() {
-        // T temp;
         int node = 0;
-        // int left = 1;
-        // int right = 2;
-        // int next;
         int next = getNextNode(node);
 
         
@@ -67,36 +63,6 @@ public class ArrayHeap<T extends Comparable<T>> extends ArrayBinaryTree<T> imple
             node = next;
             next = getNextNode(node);
         }
-        /*
-        if ((tree[left] == null) && (tree[right] == null))
-            next = count;
-        else if (tree[left] == null)
-            next = right;
-        else if ((tree[right] == null) || (((Comparable) tree[left]).compareTo(tree[right]) < 0))
-            next = left;
-        else
-            next = right;
-        
-
-        while ((next < count) && (((Comparable) tree[next]).compareTo(tree[node]) < 0)) {
-            temp = tree[node];
-            tree[node] = tree[next];
-            tree[next] = temp;
-            node = next;
-            left = 2 * node + 1;
-            right = 2 * (node + 1);
-            if ((tree[left] == null) && (tree[right] == null))
-                next = count;
-            else if (tree[left] == null)
-                next = right;
-            else if (tree[right] == null)
-                next = left;
-            else if (((Comparable) tree[left]).compareTo(tree[right]) < 0)
-                next = left;
-            else
-                next = right;
-        }
-        */
     }
 
     @Override
