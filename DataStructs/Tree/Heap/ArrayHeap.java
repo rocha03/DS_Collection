@@ -17,7 +17,7 @@ public class ArrayHeap<T extends Comparable<T>> extends ArrayBinaryTree<T> imple
     public void addElement(T element){
         // Implementação do método para inserir elementos no heap
         if (count == size())
-            //extends();
+            extends();
         tree[count] = element;
         count++;
 

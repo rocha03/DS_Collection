@@ -75,8 +75,6 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
     public T removeElement(T targetElement) throws ElementNotFoundException {
         T result = null;
         if (!isEmpty()) {
-            // if (((Comparable) targetElement).equals(root.element)) {
-            // result = root.element;
             if (((Comparable) targetElement).equals(root.getElement())) {
                 result = root.getElement();
                 root = replacement(root);
@@ -84,46 +82,26 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
             } else {
                 BinaryTreeNode<T> current, parent = root;
                 boolean found = false;
-                // if (((Comparable) targetElement).compareTo(root.element) < 0)
-                if (((Comparable) targetElement).compareTo(root.getElement()) < 0)
-                    // current = root.left;
-                    current = root.getLeft();
-                else
-                    // current = root.right;
-                    current = root.getRight();
+
+                // Define current para a subárvore esquerda ou direita de acordo com a comparação
+                current = ((Comparable) targetElement).compareTo(root.getElement()) < 0 ? root.getLeft() : root.getRight();
+
                 while (current != null && !found) {
-                    // if (targetElement.equals(current.element)) {
                     if (targetElement.equals(current.getElement())) {
                         found = true;
                         count--;
-                        // result = current.element;
                         result = current.getElement();
-                        // if (current == parent.left) {
-                        if (current == parent.getLeft()) {
-                            parent.setLeft(replacement(current));
-                            // parent.left = replacement(current);
-                        }
 
-                        else {
+                        // Substitui o nó encontrado
+                        if (current == parent.getLeft())
+                            parent.setLeft(replacement(current));
+                        else
                             parent.setRight(replacement(current));
-                            // parent.right = replacement(current);
-                        }
+
                     } else {
                         parent = current;
-                        // if (((Comparable) targetElement).compareTo(current.element) < 0)
-                        if (((Comparable) targetElement).compareTo(current.getElement()) < 0)
-                            // current = current.left;
-                            current = current.getLeft();
-                        else
-                            // current = current.right;
-                            current = current.getRight();
-                        /*
-                         * current = (
-                         * (((Comparable) targetElement).compareTo(current.getElement()) < 0) ?
-                         * current.getLeft() : current.getRight()
-                         * );
-                         */
-
+                        // Avança para a subárvore esquerda ou direita, simplificado com ternário
+                        current = (((Comparable) targetElement).compareTo(current.getElement()) < 0) ? current.getLeft() : current.getRight();
                     }
                 } // while
                 if (!found)
