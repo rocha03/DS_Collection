@@ -42,7 +42,7 @@ public class ArrayHeap<T extends Comparable<T>> extends ArrayBinaryTree<T> imple
 
     private int getNextNode(int node) {
         int left = 2 * node + 1;
-        int right = 2 * (node + 1);
+        int right = 2 * node + 2;
 
         if (left >= count && right >= count) return count; // Sem filhos
         if (left >= count) return right; // Apenas o filho direito
@@ -77,11 +77,18 @@ public class ArrayHeap<T extends Comparable<T>> extends ArrayBinaryTree<T> imple
     private void heapifyAdd() {
         // T temp;
         int next = count - 1;
-        while (next != 0 && (((Comparable) tree[next]).compareTo(tree[(next - 1) / 2]) < 0)) {
+        while (next != 0 && tree[next].compareTo(tree[(next - 1) / 2]) < 0) {
             T temp = tree[next];
             tree[next] = tree[(next - 1) / 2];
             tree[(next - 1) / 2] = temp;
             next = (next - 1) / 2;
         }
+    }
+
+    private void extends() {
+        // Double the size of the heap array when it's full
+        T[] newTree = (T[]) new Comparable[tree.length * 2];
+        System.arraycopy(tree, 0, newTree, 0, tree.length);
+        tree = newTree;
     }
 }
