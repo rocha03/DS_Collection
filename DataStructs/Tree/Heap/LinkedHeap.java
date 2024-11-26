@@ -33,18 +33,19 @@ public class LinkedHeap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
             lastNode = node;
         } else {
             HeapNode<T> next_parent = getNextParentAdd();
+            
+            // Set the new node as left or right child using ternary
             if (next_parent.getLeft() == null)
                 next_parent.setLeft(node);
             else
                 next_parent.setRight(node);
-            // node.parent = next_parent;
+            
+            // Set the parent of the new node
             node.setParent(next_parent);
-            /*
-             * node.parent = (next_parent.getLeft == null) ?
-             * (next_parent.setLeft = node) : (next_parent.setRight = node);
-             */
+
             lastNode = node;
             count++;
+
             if (count > 1)
                 heapifyAdd();
         }
@@ -58,7 +59,7 @@ public class LinkedHeap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
     private HeapNode<T> getNextParentAdd() {
         HeapNode<T> result = lastNode;
 
-        while ((result != root) && (result.getParent().getLeft() != result))
+        while (result != root && result.getParent().getLeft() != result)
             result = result.getParent();
 
         if (result != root)

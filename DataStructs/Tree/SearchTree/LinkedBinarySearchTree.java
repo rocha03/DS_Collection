@@ -142,30 +142,29 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
      * @return a reference to the replacing node
      */
     protected BinaryTreeNode<T> replacement(BinaryTreeNode<T> node) {
-        BinaryTreeNode<T> result = null;
-        if ((node.getLeft() == null) && (node.getRight() == null)) {
+        // BinaryTreeNode<T> result = null;
+        if (node.getLeft() == null && node.getRight() == null)
             return null;
-        } else if (node.getLeft() == null) {
+        if (node.getLeft() == null)
             return node.getRight();
-        } else if (node.getRight() == null) {
+        if (node.getRight() == null)
             return node.getLeft();
-        } else {
-            BinaryTreeNode<T> current = node.getRight();
-            BinaryTreeNode<T> parent = node;
-            while (current.getLeft() != null) {
-                parent = current;
-                current = current.getLeft();
-            }
-            if (node.getRight() == current)
-                current.setLeft(node.getLeft());
-            else {
-                parent.setLeft(current.getRight());
-                current.setRight(node.getRight());
-                current.setLeft(node.getLeft());
-            }
-            result = current;
+
+        BinaryTreeNode<T> current = node.getRight();
+        BinaryTreeNode<T> parent = node;
+
+        while (current.getLeft() != null) {
+            parent = current;
+            current = current.getLeft();
         }
-        return result;
+        if (node.getRight() == current)
+            current.setLeft(node.getLeft());
+        else {
+            parent.setLeft(current.getRight());
+            current.setRight(node.getRight());
+            current.setLeft(node.getLeft());
+        }
+        return current;
     }
 
     @Override
@@ -176,9 +175,8 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
 
     @Override
     public T removeMin() {
-        if (isEmpty()) {
+        if (isEmpty())
             return null;
-        }
 
         BinaryTreeNode<T> current = root;
         BinaryTreeNode<T> parent = null;
@@ -200,9 +198,9 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
 
     @Override
     public T removeMax() {
-        if (isEmpty()) {
+        if (isEmpty()) 
             return null;
-        }
+        
 
         BinaryTreeNode<T> current = root;
         BinaryTreeNode<T> parent = null;
@@ -212,11 +210,10 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
             current = current.getRight();
         }
 
-        if (parent == null) { // root node is the maximum
+        if (parent == null) // root node is the maximum
             root = root.getLeft();
-        } else {
+        else
             parent.setRight(current.getLeft());
-        }
 
         count--;
         return current.getElement();
@@ -224,27 +221,24 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
 
     @Override
     public T findMin() {
-        if (isEmpty()) {
+        if (isEmpty())
             return null;
-        }
 
         BinaryTreeNode<T> current = root;
-        while (current.getLeft() != null) {
+        while (current.getLeft() != null)
             current = current.getLeft();
-        }
+        
         return current.getElement();
     }
 
     @Override
     public T findMax() {
-        if (isEmpty()) {
+        if (isEmpty())
             return null;
-        }
 
         BinaryTreeNode<T> current = root;
-        while (current.getRight() != null) {
+        while (current.getRight() != null)
             current = current.getRight();
-        }
 
         return current.getElement();
     }
