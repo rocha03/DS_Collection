@@ -32,16 +32,11 @@ public class BinaryTreeNode<T> {
 
     /**
      * Returns the number of non-null children of this node.
-     * This method may be able to be written more efficiently.
      *
      * @return the integer number of non-null children of this node
      */
     public int numChildren() {
-        int children = 0;
-        if (left != null)
-            children = children + 1 + left.numChildren();
-        if (right != null)
-            children = children + 1 + right.numChildren();
+        int children = (left != null ? 1 + left.numChildren() : 0) + (right != null ? 1 + right.numChildren() : 0);
         return children;
     }
 
@@ -108,18 +103,13 @@ public class BinaryTreeNode<T> {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-
         if (obj == null || getClass() != obj.getClass())
             return false;
 
         BinaryTreeNode<?> other = (BinaryTreeNode<?>) obj;
 
-        if (element != null ? !element.equals(other.element) : other.element != null)
-            return false;
-
-        boolean leftEquals = (left == null && other.left == null) || (left != null && left.equals(other.left));
-        boolean rightEquals = (right == null && other.right == null) || (right != null && right.equals(other.right));
-
-        return leftEquals && rightEquals;
+        return (element != null ? element.equals(other.element) : other.element == null)
+                && (left == null ? other.left == null : left.equals(other.left))
+                && (right == null ? other.right == null : right.equals(other.right));
     }
 }
