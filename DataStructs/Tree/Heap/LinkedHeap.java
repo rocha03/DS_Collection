@@ -110,7 +110,6 @@ public class LinkedHeap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
         T minElement = root.getElement();
         // T minElement = root.element;
         if (count == 1) {
-            // root, lastNode = null;
             root = null;
             lastNode = null;
         } else {
@@ -119,7 +118,6 @@ public class LinkedHeap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
                 lastNode.getParent().setLeft(null);
             else
                 lastNode.getParent().setRight(null);
-            // root.element = lastNode.element;
             root.setElement(lastNode.getElement());
             /*
              * (lastNode.getParent().getLeft() == lastNode) ? (lastNode.getParent().setLeft(null)) : (lastNode.getParent().setRight(null));
@@ -160,6 +158,7 @@ public class LinkedHeap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
         HeapNode<T> left = (HeapNode<T>) node.getLeft();
         HeapNode<T> right = (HeapNode<T>) node.getRight();
         HeapNode<T> next;
+        
 
         if ((left == null) && (right == null))
             next = null;
