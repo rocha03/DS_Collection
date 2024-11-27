@@ -20,8 +20,7 @@ public class PriorityQueueNode<T> implements Comparable<PriorityQueueNode> {
     public PriorityQueueNode(T obj, int prio) {
         element = obj;
         priority = prio;
-        order = nextorder;
-        nextorder++;
+        order = nextorder++;
     }
 
     /**
@@ -56,33 +55,46 @@ public class PriorityQueueNode<T> implements Comparable<PriorityQueueNode> {
      *
      */
     public String toString() {
-        String temp = (element.toString() + priority + order);
-        return temp;
+        return "Element: " + element.toString() + "\nPriority: " + priority + "\nOrder: " + order;
     }
 
     /**
-     * Returns the 1 if the current node has higher priority than
-     * the given node and -1 otherwise.
+     * Compares the current node with the given node.
+     * Returns 1 if the current node has higher priority or same priority but later order.
+     * Returns -1 if the other node has higher priority or same priority but earlier order.
+     * Returns 0 if both have the same priority and order.
      *
      * @param obj the node to compare to this node
-     * @return the integer result of the comparison of the obj
-     *         node and this one
+     * @return 1, -1, or 0 based on the comparison result
      */
-    public int compareTo(PriorityQueueNode obj) {
-        //int result;
-        PriorityQueueNode<T> temp = obj;
-        /* if (priority > temp.getPriority())
-            result = 1;
-        else if (priority < temp.getPriority())
-            result = -1;
-        else if (order > temp.getOrder())
-            result = 1;
-        else
-            result = -1;
-        return result; */
-
-        if (priority > temp.getPriority() || order > temp.getOrder())
+    @Override
+    public int compareTo(PriorityQueueNode<T> obj) {
+        if (this.priority > obj.getPriority())
             return 1;
-        return -1;
+        if (this.priority < obj.getPriority())
+            return -1;
+        return Integer.compare(this.order, obj.getOrder());
     }
+
+    /**
+     * Checks if the current node is equal to the given object.
+     *
+     * @param obj the object to compare to this node
+     * @return true if equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+
+        PriorityQueueNode<?> other = (PriorityQueueNode<?>) obj;
+
+        return (element != null ? element.equals(other.element) : other.element == null)
+                && priority == other.priority
+                && order == other.order;
+    }
+
 }

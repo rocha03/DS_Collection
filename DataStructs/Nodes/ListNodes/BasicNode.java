@@ -48,4 +48,15 @@ public abstract class BasicNode<T, N extends BasicNode<T, N>> {
     public void setNext(N next) {
         this.next = next;
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        BasicNode<?, ?> other = (BasicNode<?, ?>) obj;
+
+        return (element != null ? element.equals(other.element) : other.element == null);
+    }
 }

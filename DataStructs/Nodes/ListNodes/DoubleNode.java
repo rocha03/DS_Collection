@@ -14,9 +14,7 @@ public class DoubleNode<E> extends BasicNode<E, DoubleNode<E>> {
      * Creates an empty node.
      */
     public DoubleNode() {
-        this.next = null;
-        this.element = null;
-        this.previous = null;
+        this(null);
     }
 
     /**
@@ -56,7 +54,14 @@ public class DoubleNode<E> extends BasicNode<E, DoubleNode<E>> {
 
     @Override
     public boolean equals(Object obj) {
-        // TODO Auto-generated method stub
-        return super.equals(obj);
+
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        DoubleNode<?> other = (DoubleNode<?>) obj;
+
+        return (element != null ? element.equals(other.element) : other.element == null)
+                && (next == null ? other.next == null : next.equals(other.next))
+                && (previous == null ? other.previous == null : previous.equals(other.previous));
     }
 }

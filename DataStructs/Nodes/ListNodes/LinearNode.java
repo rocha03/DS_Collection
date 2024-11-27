@@ -8,8 +8,7 @@ public class LinearNode<T> extends BasicNode<T, LinearNode<T>> {
      * Creates an empty node.
      */
     public LinearNode() {
-        this.next = null;
-        this.element = null;
+        this(null);
     }
 
     /**
@@ -31,15 +30,13 @@ public class LinearNode<T> extends BasicNode<T, LinearNode<T>> {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        
         if (obj == null || getClass() != obj.getClass())
             return false;
 
         LinearNode<?> other = (LinearNode<?>) obj;
 
-        if (element != null ? !element.equals(other.element) : other.element != null)
-            return false;
-        
-        return (next == null && other.next == null) || (next != null && next.equals(other.next));
+        return (element != null ? element.equals(other.element) : other.element == null)
+                && (next == null ? other.next == null : next.equals(other.next));
+
     }
 }
