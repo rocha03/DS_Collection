@@ -14,10 +14,11 @@ import Interfaces.List.UnorderedListADT;
 /**
  * Graph represents an adjacency matrix implementation of a graph.
  *
+ * @param <T> the type of elements stored in the graph
  */
 public class ArrayGraph<T> implements GraphADT<T> {
     /**
-     * 
+     * Default capacity for the graph
      */
     private final int DEFAULT_CAPACITY = 10;
     /**
@@ -34,7 +35,7 @@ public class ArrayGraph<T> implements GraphADT<T> {
     protected T[] vertices;
 
     /**
-     * Creates an empty graph.
+     * Creates an empty graph with the default capacity
      */
     public ArrayGraph() {
         numVertices = 0;
@@ -43,9 +44,9 @@ public class ArrayGraph<T> implements GraphADT<T> {
     }
 
     /**
-     * Creates an empty graph.
+     * Creates an empty graph with a specified initial capacity
      * 
-     * @param size
+     * @param size rhe initial capacity of the graph
      */
     public ArrayGraph(int size) {
         numVertices = 0;
@@ -54,7 +55,7 @@ public class ArrayGraph<T> implements GraphADT<T> {
     }
 
     /**
-     * Inserts an edge between two vertices of the graph.
+     * Adds an edge between two vertices using their references.
      *
      * @param vertex1 the first vertex
      * @param vertex2 the second vertex
@@ -64,10 +65,10 @@ public class ArrayGraph<T> implements GraphADT<T> {
     }
 
     /**
-     * Inserts an edge between two vertices of the graph.
+     * Adds an edge between two vertices using their indices.
      *
-     * @param index1 the first index
-     * @param index2 the second index
+     * @param index1 the index of the first vertex
+     * @param index2 the index of the secund vertex
      */
     public void addEdge(int index1, int index2) {
         if (indexIsValid(index1) && indexIsValid(index2)) {
@@ -77,10 +78,10 @@ public class ArrayGraph<T> implements GraphADT<T> {
     }
 
     /**
-     * Adds a vertex to the graph, expanding the capacity of the graph
-     * if necessary. It also associates an object with the vertex.
+     * Adds a vertex to the graph.
+     * Expanding the capacity if the array is full.
      *
-     * @param vertex the vertex to add to the graph
+     * @param vertex the vertex to be added
      */
     public void addVertex(T vertex) {
         if (numVertices == vertices.length)
@@ -93,6 +94,12 @@ public class ArrayGraph<T> implements GraphADT<T> {
         numVertices++;
     }
 
+    /**
+     * Removes an edge between two vertices using their references.
+     * 
+     * @param vertex1 the first vertex
+     * @param vertex2 the second vertex
+     */
     @Override
     public void removeEdge(T vertex1, T vertex2) {
         removeEdge(getIndex(vertex1), getIndex(vertex2));
@@ -100,9 +107,10 @@ public class ArrayGraph<T> implements GraphADT<T> {
     }
 
     /**
+     * Removes an edge between two vertices using their indices.
      * 
-     * @param index1
-     * @param index2
+     * @param index1 the index of the first vertex
+     * @param index2 the index of the secund vertex
      */
     public void removeEdge(int index1, int index2) {
         if (indexIsValid(index1) && indexIsValid(index2)) {
@@ -111,6 +119,12 @@ public class ArrayGraph<T> implements GraphADT<T> {
         }
     }
 
+    /**
+     * Removes a vertex from the graph.
+     * 
+     * @param vertex the vertex to remove
+     * @throws EmptyCollectionException if the graph is empty
+     */
     @Override
     public void removeVertex(T vertex) throws EmptyCollectionException {
         if (isEmpty())
@@ -197,12 +211,10 @@ public class ArrayGraph<T> implements GraphADT<T> {
      * @param index
      */
     private int getIndex(T vertex) {
-        int i = 0;
-        while (i < vertices.length) {
+        for (int i = 0; i < numVertices; i++)
             if (vertices[i].equals(vertex))
                 return i;
-            i++;
-        }
+
         return -1;
     }
 
@@ -272,46 +284,48 @@ public class ArrayGraph<T> implements GraphADT<T> {
         return list.iterator();
     }
 
-    /* @Override
-    public Iterator<T> iteratorDFS(T startVertex) {
-        StackADT<T> stack = new LinkedStack<T>();
-        UnorderedListADT<T> list = new ArrayUnorderedList<T>();
-        boolean[] visited = new boolean[numVertices];
-        T vertex;
-        boolean found;
-
-        if (!indexIsValid(getIndex(startVertex)))
-            return list.iterator();
-
-        stack.push(startVertex);
-        list.addToRear(vertices[getIndex(startVertex)]);
-        visited[getIndex(startVertex)] = true;
-
-        while (!stack.isEmpty()) {
-            try {
-                vertex = stack.peek();
-                found = false;
-                // Find a vertex adjacent to x that has not been visited
-                // Push it on the stack
-                int i = 0;
-                while (i < numVertices && !found) {
-                    if (adjMatrix[getIndex(vertex)][i] == 1 && !visited[i]) {
-                        stack.push(vertices[i]);
-                        list.addToRear(vertices[i]);
-                        visited[i] = true;
-                        found = true;
-                    }
-                    i++;
-                }
-                if (!found && !stack.isEmpty())
-                    stack.pop();
-            } catch (EmptyCollectionException e) {
-                // Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        return list.iterator();
-    } */
+    /*
+     * @Override
+     * public Iterator<T> iteratorDFS(T startVertex) {
+     * StackADT<T> stack = new LinkedStack<T>();
+     * UnorderedListADT<T> list = new ArrayUnorderedList<T>();
+     * boolean[] visited = new boolean[numVertices];
+     * T vertex;
+     * boolean found;
+     * 
+     * if (!indexIsValid(getIndex(startVertex)))
+     * return list.iterator();
+     * 
+     * stack.push(startVertex);
+     * list.addToRear(vertices[getIndex(startVertex)]);
+     * visited[getIndex(startVertex)] = true;
+     * 
+     * while (!stack.isEmpty()) {
+     * try {
+     * vertex = stack.peek();
+     * found = false;
+     * // Find a vertex adjacent to x that has not been visited
+     * // Push it on the stack
+     * int i = 0;
+     * while (i < numVertices && !found) {
+     * if (adjMatrix[getIndex(vertex)][i] == 1 && !visited[i]) {
+     * stack.push(vertices[i]);
+     * list.addToRear(vertices[i]);
+     * visited[i] = true;
+     * found = true;
+     * }
+     * i++;
+     * }
+     * if (!found && !stack.isEmpty())
+     * stack.pop();
+     * } catch (EmptyCollectionException e) {
+     * // Auto-generated catch block
+     * e.printStackTrace();
+     * }
+     * }
+     * return list.iterator();
+     * }
+     */
 
     @Override
     public Iterator<T> iteratorDFS(T startVertex) {
@@ -348,9 +362,73 @@ public class ArrayGraph<T> implements GraphADT<T> {
         }
     }
 
+    /**
+     * Returns an iterator over the shortest path between two vertices using BFS.
+     *
+     * @param startVertex  the starting vertex in the graph
+     * @param targetVertex the target vertex in the graph
+     * @return an iterator over the shortest path from startVertex to targetVertex,
+     *         or an empty iterator if no path exists or vertices are invalid
+     */
     @Override
     public Iterator<T> iteratorShortestPath(T startVertex, T targetVertex) {
-        // TODO Auto-generated method stub
-        return null;
+        // Verificar se os vertices existem no grafo
+        int startIndex = getIndex(startVertex);
+        int targetIndex = getIndex(targetVertex);
+        if (!indexIsValid(startIndex) || !indexIsValid(targetIndex)) {
+            return new ArrayUnorderedList<T>().iterator();
+        }
+
+        // Fila para BFS
+        QueueADT<Integer> queue = new LinkedQueue<>();
+        boolean[] visited = new boolean[numVertices];
+        int[] predecessors = new int[numVertices];
+
+        // Inicializar predecessores como -1 (não visitados)
+        for (int i = 0; i < numVertices; i++) {
+            predecessors[i] = -1;
+        }
+
+        queue.enqueue(startIndex);
+        visited[startIndex] = true;
+
+        boolean found = false;
+
+        // BFS para Encontrar o caminho mais curto
+        while (!queue.isEmpty() && !found) {
+            try {
+                int currentIndex = queue.dequeue();
+                for (int i = 0; i < numVertices; i++) {
+                    if (adjMatrix[currentIndex][i] == 1 && !visited[i]) {
+                        visited[i] = true;
+                        predecessors[i] = currentIndex;
+                        queue.enqueue(i);
+
+                        // Se encontrar o destino, parar a busca
+                        if (i == targetIndex) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+            } catch (EmptyCollectionException e) {
+                e.printStackTrace();// Captura de exceção por segurança
+            }
+        }
+
+        // Se o destino não for encontrado, retorna o iterador vazio
+        if (!found) {
+            return new ArrayUnorderedList<T>().iterator();
+        }
+
+        // Reconstruir o caminho a partir dos predecessores
+        UnorderedListADT<T> path = new ArrayUnorderedList<>();
+        int current = targetIndex;
+        while (current != -1) {
+            path.addToFront(vertices[current]);
+            current = predecessors[current];
+        }
+
+        return path.iterator();
     }
 }
