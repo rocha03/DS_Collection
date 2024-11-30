@@ -11,14 +11,17 @@ public class ArrayQueue<T> implements QueueADT<T> {
      * Default capacity of the queue.
      */
     private static final int DEFAULT_CAPACITY = 100;
+
     /**
      * Index of the front of the queue.
      */
     private static final int FRONT = 0;
+
     /**
      * Array that stores the elements of the queue.
      */
     private T[] queue;
+
     /**
      * Index of the rear of the queue.
      */

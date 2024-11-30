@@ -11,22 +11,15 @@ import Interfaces.QueueADT;
 import Interfaces.List.UnorderedListADT;
 import Interfaces.Tree.BinaryTreeADT;
 
-/**
- * LinkedBinaryTree implements the BinaryTreeADT interface.
- */
+/** LinkedBinaryTree implements the BinaryTreeADT interface. */
 public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
-    /**
-     * Number of elements in the tree.
-     */
+    /** Number of elements in the tree. */
     protected int count;
-    /**
-     * Root element form the tree.
-     */
+
+    /** Root element form the tree. */
     protected BinaryTreeNode<T> root;
 
-    /**
-     * Creates an empty binary tree.
-     */
+    /** Creates an empty binary tree. */
     public LinkedBinaryTree() {
         count = 0;
         root = null;
@@ -129,19 +122,21 @@ public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
         if (node == null)
             return tempList.iterator();
 
-        //enqueue the root elem
+        // enqueue the root elem
         queue.enqueue(node);
 
-        //check if there are still elements in the queue
+        // check if there are still elements in the queue
         while (!queue.isEmpty()) {
             try {
-                //extract and insert in the list the next element
+                // extract and insert in the list the next element
                 node = queue.dequeue();
                 tempList.addToRear(node.getElement());
 
-                //check if the node has children and if yes enqueue them
-                if (node.getLeft() != null) queue.enqueue(node.getLeft());
-                if (node.getRight() != null) queue.enqueue(node.getRight());
+                // check if the node has children and if yes enqueue them
+                if (node.getLeft() != null)
+                    queue.enqueue(node.getLeft());
+                if (node.getRight() != null)
+                    queue.enqueue(node.getRight());
             } catch (EmptyCollectionException e) {
                 // Auto-generated catch block
                 e.printStackTrace();
@@ -172,7 +167,7 @@ public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      *                 for this traversal.
      * @param tempList the temporary list for use in this traversal.
      */
-     protected void inorder(BinaryTreeNode<T> node, UnorderedListADT<T> tempList) {
+    protected void inorder(BinaryTreeNode<T> node, UnorderedListADT<T> tempList) {
         if (node != null) {
             inorder(node.getLeft(), tempList);
             tempList.addToRear(node.getElement());

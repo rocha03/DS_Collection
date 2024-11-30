@@ -4,22 +4,15 @@ import DataStructs.Nodes.ListNodes.LinearNode;
 import Exceptions.EmptyCollectionException;
 import Interfaces.StackADT;
 
-/**
- * The LinkedStack class implements a stack using a linked list.
- */
+/** The LinkedStack class implements a stack using a linked list. */
 public class LinkedStack<T> implements StackADT<T> {
-    /**
-     * Top node in the stack.
-     */
+    /** Top node in the stack. */
     private LinearNode<T> top;
-    /**
-     * int that represents the number of elements.
-     */
+
+    /** int that represents the number of elements. */
     private int count;
 
-    /**
-     * Creates an empty stack.
-     */
+    /** Creates an empty stack. */
     public LinkedStack() {
         this.top = null;
         this.count = 0;

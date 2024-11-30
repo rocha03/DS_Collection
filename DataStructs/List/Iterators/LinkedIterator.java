@@ -16,20 +16,19 @@ import DataStructs.Nodes.ListNodes.BasicNode;
  */
 public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T> {
     
-    /**
-     * The current node in the linked list.
-     */
-    private N node;
+    /** The current node in the linked list. */
+    private N current;
 
-    /**
-     * A reference to the ModCount object that tracks modifications to the list.
-     */
+    /** A reference to the ModCount object that tracks modifications to the list. */
     private final ModCount modCount;
 
-    /**
-     * The expected modCount value to detect concurrent modifications.
-     */
+    /** The expected modCount value to detect concurrent modifications. */
     private final int expectedModCount;
+
+    /** */
+    private boolean canRemove;
+    /** */
+    private N lastReturned;
 
     /**
      * Constructs an iterator for the linked list.
@@ -38,9 +37,12 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
      * @param modCount the ModCount instance that tracks structural modifications to the list.
      */
     public LinkedIterator(N node, ModCount modCount) {
-        this.node = node;
+        this.current = node;
         this.modCount = modCount;
         this.expectedModCount = modCount.value;  // Capture initial modCount value
+
+        this.canRemove = false;
+        this.lastReturned = null;
     }
 
     /**
@@ -52,7 +54,7 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
     @Override
     public boolean hasNext() {
         checkForCoModification();
-        return node.getNext() != null;
+        return current.getNext() != null;
     }
 
     /**
@@ -65,9 +67,10 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
     @Override
     public T next() {
         checkForCoModification();
-        if (!hasNext()) throw new NoSuchElementException("No more elements in the list.");
-        T prev = node.getElement();
-        node = node.getNext();
+        if (!hasNext())
+            throw new NoSuchElementException("No more elements in the list.");
+        T prev = current.getElement();
+        current = current.getNext();
         return prev;
     }
 
@@ -79,7 +82,25 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
      */
     @Override
     public void remove() {
-        throw new UnsupportedOperationException("Remove operation is not implemented.");
+        checkForCoModification();
+        if (!canRemove) {
+            throw new IllegalStateException("");
+        }
+        if (lastReturned == current) {
+            throw new IllegalStateException("");
+        }
+
+        if (lastReturned != null) {
+            N previous = findPrevious(lastReturned);
+            if (previous != null)
+                previous.setNext(lastReturned.getNext());
+        }
+
+        lastReturned = null;
+        canRemove = false;
+        modCount.increment();
+
+        // throw new UnsupportedOperationException("Remove operation is not implemented.");
     }
 
     /**
@@ -93,5 +114,13 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
         if (expectedModCount != modCount.value) {
             throw new ConcurrentModificationException("List was modified during iteration.");
         }
+    }
+
+    private N findPrevious(N node) {
+        N temp = current;
+        while (temp != null && temp.getNext() != node) {
+            temp = temp.getNext();
+        }
+        return temp;
     }
 }

@@ -46,6 +46,11 @@ public class ArrayIterator<T> implements Iterator<T> {
      * @param modCount the ModCount object tracking structural modifications to the list.
      */
     public ArrayIterator(T[] list, int count, ModCount modCount) {
+        if (list == null || modCount == null)
+            throw new IllegalArgumentException("List and ModCount cannot be null.");
+        if (count < 0 || count > list.length)
+            throw new IllegalArgumentException("Count must be non-negative and within array bounds.");
+        
         this.list = list;
         this.count = count;
         this.current = 0;

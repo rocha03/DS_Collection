@@ -7,27 +7,21 @@ import Exceptions.ElementNotFoundException;
 import Interfaces.List.UnorderedListADT;
 import Interfaces.Tree.BinaryTreeADT;
 
-/**
- * ArrayBinaryTree implements the BinaryTreeADT interface.
- */
+/** ArrayBinaryTree implements the BinaryTreeADT interface. */
 public abstract class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
-    /**
-     * Constant to represent the default capacity of the array.
-     */
+    /** Constant to represent the default capacity of the array. */
     private final int CAPACITY = 50;
+
     /**
      * int that represents both the number of elements and the next
      * available position in the array.
      */
     protected int count;
-    /**
-     * Array of generic elements to represent the tree.
-     */
+
+    /** Array of generic elements to represent the tree. */
     protected T[] tree;
 
-    /**
-     * Creates an empty binary tree.
-     */
+    /** Creates an empty binary tree. */
     public ArrayBinaryTree() {
         count = 0;
         tree = (T[]) new Object[CAPACITY];

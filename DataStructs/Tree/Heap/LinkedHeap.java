@@ -104,7 +104,6 @@ public class LinkedHeap<T extends Comparable<T>> extends LinkedBinaryTree<T> imp
         if (isEmpty())
             throw new EmptyCollectionException("Empty Heap");
         T minElement = root.getElement();
-        // T minElement = root.element;
         if (count == 1) {
             root = null;
             lastNode = null;
@@ -166,9 +165,7 @@ public class LinkedHeap<T extends Comparable<T>> extends LinkedBinaryTree<T> imp
         node.setElement(temp);
     }
 
-    /**
-     * Returns the next child to compare in the heap.
-     */
+    /** Returns the next child to compare in the heap. */
     private HeapNode<T> getNextChild(HeapNode<T> node) {
         HeapNode<T> left = (HeapNode<T>) node.getLeft();
         HeapNode<T> right = (HeapNode<T>) node.getRight();

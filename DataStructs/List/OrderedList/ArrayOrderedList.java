@@ -48,6 +48,8 @@ public class ArrayOrderedList<T> extends ArrayList<T> implements OrderedListADT<
             throw new IllegalArgumentException("Not comparable");
 
         int position = 0;
+
+        @SuppressWarnings("unchecked")
         Comparable<T> comparable = (Comparable<T>) element;
 
         // Find the appropriate position to insert the element to maintain sorted order

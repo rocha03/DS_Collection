@@ -147,8 +147,15 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
 
     @Override
     public void removeAllOccurrences(T targetElement) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeAllOccurrences'");
+        boolean removed = true;
+        try {
+            while (removed) {
+                removeElement(targetElement);
+            }
+        } catch (ElementNotFoundException e) {
+            removed = false;
+        }
+        //throw new UnsupportedOperationException("Unimplemented method 'removeAllOccurrences'");
     }
 
     @Override
