@@ -284,48 +284,43 @@ public class ArrayGraph<T> implements GraphADT<T> {
         return list.iterator();
     }
 
-    /*
-     * @Override
-     * public Iterator<T> iteratorDFS(T startVertex) {
-     * StackADT<T> stack = new LinkedStack<T>();
-     * UnorderedListADT<T> list = new ArrayUnorderedList<T>();
-     * boolean[] visited = new boolean[numVertices];
-     * T vertex;
-     * boolean found;
-     * 
-     * if (!indexIsValid(getIndex(startVertex)))
-     * return list.iterator();
-     * 
-     * stack.push(startVertex);
-     * list.addToRear(vertices[getIndex(startVertex)]);
-     * visited[getIndex(startVertex)] = true;
-     * 
-     * while (!stack.isEmpty()) {
-     * try {
-     * vertex = stack.peek();
-     * found = false;
-     * // Find a vertex adjacent to x that has not been visited
-     * // Push it on the stack
-     * int i = 0;
-     * while (i < numVertices && !found) {
-     * if (adjMatrix[getIndex(vertex)][i] == 1 && !visited[i]) {
-     * stack.push(vertices[i]);
-     * list.addToRear(vertices[i]);
-     * visited[i] = true;
-     * found = true;
-     * }
-     * i++;
-     * }
-     * if (!found && !stack.isEmpty())
-     * stack.pop();
-     * } catch (EmptyCollectionException e) {
-     * // Auto-generated catch block
-     * e.printStackTrace();
-     * }
-     * }
-     * return list.iterator();
-     * }
-     */
+    /* @Override
+    public Iterator<T> iteratorDFS(T startVertex) {
+        StackADT<T> stack = new LinkedStack<T>();
+        UnorderedListADT<T> list = new ArrayUnorderedList<T>();
+        boolean[] visited = new boolean[numVertices];
+        T vertex;
+        boolean found;
+        if (!indexIsValid(getIndex(startVertex)))
+            return list.iterator();
+        stack.push(startVertex);
+        list.addToRear(vertices[getIndex(startVertex)]);
+        visited[getIndex(startVertex)] = true;
+        while (!stack.isEmpty()) {
+            try {
+                vertex = stack.peek();
+                found = false;
+                // Find a vertex adjacent to x that has not been visited
+                // Push it on the stack
+                int i = 0;
+                while (i < numVertices && !found) {
+                    if (adjMatrix[getIndex(vertex)][i] == 1 && !visited[i]) {
+                        stack.push(vertices[i]);
+                        list.addToRear(vertices[i]);
+                        visited[i] = true;
+                        found = true;
+                    }
+                    i++;
+                }
+                if (!found && !stack.isEmpty())
+                    stack.pop();
+            } catch (EmptyCollectionException e) {
+                // Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return list.iterator();
+    } */
 
     @Override
     public Iterator<T> iteratorDFS(T startVertex) {
