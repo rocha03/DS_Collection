@@ -17,26 +17,19 @@ import Interfaces.List.UnorderedListADT;
  * @param <T> the type of elements stored in the graph
  */
 public class ArrayGraph<T> implements GraphADT<T> {
-    /**
-     * Default capacity for the graph
-     */
+    /** Default capacity for the graph */
     private final int DEFAULT_CAPACITY = 10;
-    /**
-     * Number of vertices in the graph, and the next available position.
-     */
+
+    /** Number of vertices in the graph, and the next available position. */
     protected int numVertices;
-    /**
-     * Adjacency matrix.
-     */
+
+    /** Adjacency matrix. */
     protected int[][] adjMatrix;
-    /**
-     * Values of vertices.
-     */
+
+    /** Values of vertices. */
     protected T[] vertices;
 
-    /**
-     * Creates an empty graph with the default capacity
-     */
+    /** Creates an empty graph with the default capacity */
     public ArrayGraph() {
         numVertices = 0;
         this.adjMatrix = new int[DEFAULT_CAPACITY][DEFAULT_CAPACITY];
@@ -44,7 +37,7 @@ public class ArrayGraph<T> implements GraphADT<T> {
     }
 
     /**
-     * Creates an empty graph with a specified initial capacity
+     * Creates an empty graph with a specified initial capacity.
      * 
      * @param size rhe initial capacity of the graph
      */
@@ -78,8 +71,7 @@ public class ArrayGraph<T> implements GraphADT<T> {
     }
 
     /**
-     * Adds a vertex to the graph.
-     * Expanding the capacity if the array is full.
+     * Adds a vertex to the graph, expanding capacity if necessary.
      *
      * @param vertex the vertex to be added
      */
@@ -103,7 +95,6 @@ public class ArrayGraph<T> implements GraphADT<T> {
     @Override
     public void removeEdge(T vertex1, T vertex2) {
         removeEdge(getIndex(vertex1), getIndex(vertex2));
-
     }
 
     /**
@@ -162,6 +153,11 @@ public class ArrayGraph<T> implements GraphADT<T> {
         numVertices--;
     }
 
+    /** 
+     * Checks if the graph is connected.
+     * 
+     * @return true if the graph is connected, false otherwise 
+     */
     @Override
     public boolean isConnected() {
         if (isEmpty())
@@ -196,40 +192,46 @@ public class ArrayGraph<T> implements GraphADT<T> {
         return count;
     }
 
+    /** @return true if the graph is empty, false otherwise */
     @Override
     public boolean isEmpty() {
         return size() == 0;
     }
 
+    /** 
+     * Check if the graph is empty.
+     * 
+     * @return the number of vertices in the graph
+     */
     @Override
     public int size() {
         return numVertices;
     }
 
     /**
+     * Gets the index of a vertex.
      * 
-     * @param index
+     * @param vertex the vertex to find
+     * @return the index of the vertex, or -1 if not found
      */
     private int getIndex(T vertex) {
         for (int i = 0; i < numVertices; i++)
             if (vertices[i].equals(vertex))
                 return i;
-
         return -1;
     }
 
     /**
+     * Validates if an index is within bounds.
      * 
-     * @param index
-     * @return
+     * @param index the index to validate
+     * @return true if valid, false otherwise
      */
     private boolean indexIsValid(int index) {
         return index >= 0;
     }
 
-    /**
-     * 
-     */
+    /** Expands the graph capacity by doubling its size. */
     private void expandCapacity() {
         int newSize = vertices.length * 2;
         T[] newArr = (T[]) (new Object[newSize]);
@@ -250,6 +252,12 @@ public class ArrayGraph<T> implements GraphADT<T> {
 
     }
 
+    /**
+     * Returns an iterator for breadth-first search (BFS) starting from a given vertex.
+     *
+     * @param startVertex the vertex to start the BFS from
+     * @return an iterator over the vertices visited during the BFS
+     */
     @Override
     public Iterator<T> iteratorBFS(T startVertex) {
         QueueADT<T> queue = new LinkedQueue<T>();
@@ -327,6 +335,12 @@ public class ArrayGraph<T> implements GraphADT<T> {
      * }
      */
 
+    /**
+     * Returns an iterator for depth-first search (DFS) starting from a given vertex.
+     *
+     * @param startVertex the vertex to start the DFS from
+     * @return an iterator over the vertices visited during the DFS
+     */
     @Override
     public Iterator<T> iteratorDFS(T startVertex) {
         UnorderedListADT<T> list = new ArrayUnorderedList<T>();
@@ -412,7 +426,7 @@ public class ArrayGraph<T> implements GraphADT<T> {
                     }
                 }
             } catch (EmptyCollectionException e) {
-                e.printStackTrace();// Captura de exceção por segurança
+                e.printStackTrace(); // Captura de exceção por segurança
             }
         }
 

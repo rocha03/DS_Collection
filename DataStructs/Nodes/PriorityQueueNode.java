@@ -3,9 +3,8 @@ package DataStructs.Nodes;
 /**
  * PriorityQueueNode represents a node in a priority queue
  * containing a comparable object, order, and a priority value.
- *
  */
-public class PriorityQueueNode<T> implements Comparable<PriorityQueueNode> {
+public class PriorityQueueNode<T> implements Comparable<PriorityQueueNode<T>> {
     private static int nextorder = 0;
     private int priority;
     private int order;
@@ -96,5 +95,4 @@ public class PriorityQueueNode<T> implements Comparable<PriorityQueueNode> {
                 && priority == other.priority
                 && order == other.order;
     }
-
 }

@@ -44,7 +44,11 @@ public class PriorityQueue<T> extends ArrayHeap<PriorityQueueNode<T>> {
         if (isEmpty()) {
             throw new IllegalStateException("Priority queue is empty.");
         }
-        PriorityQueueNode<T> temp = super.removeMin(); // Remove the node with the smallest priority
-        return temp.getElement(); // Return only the element, not the priority
+        try {
+            PriorityQueueNode<T> temp = super.removeMin(); // Remove the node with the smallest priority
+            return temp.getElement(); // Return only the element, not the priority
+        } catch (Exception e) {
+            throw new IllegalStateException("Priority queue is empty.", e);
+        }
     }
 }
