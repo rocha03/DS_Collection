@@ -7,30 +7,22 @@ import Interfaces.QueueADT;
  * The CircularArrayQueue class implements a circular queue using an array.
  */
 public class CircularArrayQueue<T> implements QueueADT<T> {
-    /**
-     * Default capacity of the queue.
-     */
+    /** Default capacity of the queue. */
     private static final int DEFAULT_CAPACITY = 100;
-    /**
-     * Array that stores the elements of the queue.
-     */
+
+    /** Array that stores the elements of the queue. */
     private T[] queue;
-    /**
-     * Index of the front of the queue.
-     */
+
+    /** Index of the front of the queue. */
     private int front;
-    /**
-     * Index of the rear of the queue.
-     */
+
+    /** Index of the rear of the queue. */
     private int rear;
-    /**
-     * Count of elements in the queue.
-     */
+
+    /** Count of elements in the queue. */
     private int count;
 
-    /**
-     * Creates a circular queue with the default capacity.
-     */
+    /** Creates a circular queue with the default capacity. */
     public CircularArrayQueue() {
         this.queue = (T[]) (new Object[DEFAULT_CAPACITY]);
         this.front = this.rear = this.count = 0;
