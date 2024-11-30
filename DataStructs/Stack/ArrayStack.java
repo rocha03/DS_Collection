@@ -7,23 +7,19 @@ import Interfaces.StackADT;
  * The ArrayStack class implements a stack using an array.
  */
 public class ArrayStack<T> implements StackADT<T> {
-    /**
-     * Constant to represent the default capacity of the array.
-     */
+    /** Constant to represent the default capacity of the array. */
     private final int DEFAULT_CAPACITY = 100;
+
     /**
      * int that represents both the number of elements and the next
      * available position in the array.
      */
     private int top;
-    /**
-     * Array of generic elements to represent the stack.
-     */
+
+    /** Array of generic elements to represent the stack. */
     private T[] stack;
 
-    /**
-     * Creates an empty stack using the default capacity.
-     */
+    /** Creates an empty stack using the default capacity. */
     public ArrayStack() {
         top = 0;
         stack = (T[]) (new Object[DEFAULT_CAPACITY]);
@@ -65,9 +61,7 @@ public class ArrayStack<T> implements StackADT<T> {
         stack[top++] = element;
     }
 
-    /**
-     * Expands the capacity of the stack by doubling the size of the array.
-     */
+    /** Expands the capacity of the stack by doubling the size of the array. */
     public void expand() {
         T[] newStack = (T[]) (new Object[stack.length * 2]);
         for (int i = 0; i < stack.length; i++) {

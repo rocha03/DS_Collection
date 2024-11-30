@@ -8,11 +8,10 @@ import Interfaces.Tree.HeapADT;
 /**
  * Heap implements a heap.
  * LinkedHeap implementes a heap using a linked binarry tree.
- *
  */
 public class LinkedHeap<T extends Comparable<T>> extends LinkedBinaryTree<T> implements HeapADT<T> {
     private HeapNode<T> lastNode;
-    //private HeapNode<T> root;
+    // private HeapNode<T> root;
 
     public LinkedHeap() {
         super();
@@ -36,13 +35,13 @@ public class LinkedHeap<T extends Comparable<T>> extends LinkedBinaryTree<T> imp
             lastNode = node;
         } else {
             HeapNode<T> next_parent = getNextParentAdd();
-            
+
             // Set the new node as left or right child using ternary
             if (next_parent.getLeft() == null)
                 next_parent.setLeft(node);
             else
                 next_parent.setRight(node);
-            
+
             // Set the parent of the new node
             node.setParent(next_parent);
             lastNode = node;
@@ -117,7 +116,8 @@ public class LinkedHeap<T extends Comparable<T>> extends LinkedBinaryTree<T> imp
                 lastNode.getParent().setRight(null);
             root.setElement(lastNode.getElement());
             /*
-             * (lastNode.getParent().getLeft() == lastNode) ? (lastNode.getParent().setLeft(null)) : (lastNode.getParent().setRight(null));
+             * (lastNode.getParent().getLeft() == lastNode) ?
+             * (lastNode.getParent().setLeft(null)) : (lastNode.getParent().setRight(null));
              * root.setElement(lastNode.getElement());
              */
             lastNode = next_last;
@@ -136,16 +136,16 @@ public class LinkedHeap<T extends Comparable<T>> extends LinkedBinaryTree<T> imp
      */
     private HeapNode<T> getNewLastNode() {
         HeapNode<T> result = lastNode;
-        
+
         while ((result != root) && (result.getParent().getLeft() == result))
             result = result.getParent();
 
         if (result != root)
             result = (HeapNode<T>) result.getParent().getLeft();
-        
+
         while (result.getRight() != null)
             result = (HeapNode<T>) result.getRight();
-        
+
         return result;
     }
 
@@ -153,46 +153,34 @@ public class LinkedHeap<T extends Comparable<T>> extends LinkedBinaryTree<T> imp
      * Reorders this heap after removing the root element.
      */
     private void heapifyRemove() {
-        T temp;
         HeapNode<T> node = (HeapNode<T>) root;
-        HeapNode<T> left = (HeapNode<T>) node.getLeft();
-        HeapNode<T> right = (HeapNode<T>) node.getRight();
-        HeapNode<T> next;
-        
+        T temp = node.getElement();
+        HeapNode<T> next = getNextChild(node);
 
-        if ((left == null) && (right == null))
-            next = null;
-        else if (right == null || ((Comparable) left.getElement()).compareTo(right.getElement()) < 0)
-            next = left;
-        else if (left == null)
-            next = right;
-        else
-            next = right;
-        
-        next = (left == null) ? right :
-            (right == null) ? left : 
-                (((Comparable) left.getElement()).compareTo(right.getElement()) < 0 ? left : right);
-
-        temp = node.getElement();
-
-        while ((next != null) && (((Comparable) next.getElement()).compareTo(temp) < 0)) {
+        while (next != null && next.getElement().compareTo(temp) < 0) {
             node.setElement(next.getElement());
             node = next;
-            left = (HeapNode<T>) node.getLeft();
-            right = (HeapNode<T>) node.getRight();
-
-            if ((left == null) && (right == null))
-                next = null;
-            else if (left == null)
-                next = right;
-            else if (right == null)
-                next = left;
-            else if (((Comparable) left.getElement()).compareTo(right.getElement()) < 0)
-                next = left;
-            else
-                next = right;
+            next = getNextChild(node);
         }
+
         node.setElement(temp);
+    }
+
+    /**
+     * Returns the next child to compare in the heap.
+     */
+    private HeapNode<T> getNextChild(HeapNode<T> node) {
+        HeapNode<T> left = (HeapNode<T>) node.getLeft();
+        HeapNode<T> right = (HeapNode<T>) node.getRight();
+
+        if (left == null && right == null)
+            return null;
+        if (left == null)
+            return right;
+        if (right == null)
+            return left;
+
+        return (left.getElement().compareTo(right.getElement()) < 0) ? left : right;
     }
 
     @Override
