@@ -214,7 +214,7 @@ public class ArrayGraph<T> implements GraphADT<T> {
      * @param vertex the vertex to find
      * @return the index of the vertex, or -1 if not found
      */
-    private int getIndex(T vertex) {
+    protected int getIndex(T vertex) {
         for (int i = 0; i < numVertices; i++)
             if (vertices[i].equals(vertex))
                 return i;
@@ -227,7 +227,7 @@ public class ArrayGraph<T> implements GraphADT<T> {
      * @param index the index to validate
      * @return true if valid, false otherwise
      */
-    private boolean indexIsValid(int index) {
+    protected boolean indexIsValid(int index) {
         return index >= 0;
     }
 
