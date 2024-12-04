@@ -86,12 +86,6 @@ public class ArrayGraph<T> implements GraphADT<T> {
         numVertices++;
     }
 
-    /**
-     * Removes an edge between two vertices using their references.
-     * 
-     * @param vertex1 the first vertex
-     * @param vertex2 the second vertex
-     */
     @Override
     public void removeEdge(T vertex1, T vertex2) {
         removeEdge(getIndex(vertex1), getIndex(vertex2));
@@ -110,12 +104,6 @@ public class ArrayGraph<T> implements GraphADT<T> {
         }
     }
 
-    /**
-     * Removes a vertex from the graph.
-     * 
-     * @param vertex the vertex to remove
-     * @throws EmptyCollectionException if the graph is empty
-     */
     @Override
     public void removeVertex(T vertex) throws EmptyCollectionException {
         if (isEmpty())
@@ -153,11 +141,6 @@ public class ArrayGraph<T> implements GraphADT<T> {
         numVertices--;
     }
 
-    /** 
-     * Checks if the graph is connected.
-     * 
-     * @return true if the graph is connected, false otherwise 
-     */
     @Override
     public boolean isConnected() {
         if (isEmpty())
@@ -192,17 +175,11 @@ public class ArrayGraph<T> implements GraphADT<T> {
         return count;
     }
 
-    /** @return true if the graph is empty, false otherwise */
     @Override
     public boolean isEmpty() {
         return size() == 0;
     }
 
-    /** 
-     * Check if the graph is empty.
-     * 
-     * @return the number of vertices in the graph
-     */
     @Override
     public int size() {
         return numVertices;
@@ -252,12 +229,6 @@ public class ArrayGraph<T> implements GraphADT<T> {
 
     }
 
-    /**
-     * Returns an iterator for breadth-first search (BFS) starting from a given vertex.
-     *
-     * @param startVertex the vertex to start the BFS from
-     * @return an iterator over the vertices visited during the BFS
-     */
     @Override
     public Iterator<T> iteratorBFS(T startVertex) {
         QueueADT<T> queue = new LinkedQueue<T>();
@@ -330,12 +301,6 @@ public class ArrayGraph<T> implements GraphADT<T> {
         return list.iterator();
     } */
 
-    /**
-     * Returns an iterator for depth-first search (DFS) starting from a given vertex.
-     *
-     * @param startVertex the vertex to start the DFS from
-     * @return an iterator over the vertices visited during the DFS
-     */
     @Override
     public Iterator<T> iteratorDFS(T startVertex) {
         UnorderedListADT<T> list = new ArrayUnorderedList<T>();
@@ -371,14 +336,6 @@ public class ArrayGraph<T> implements GraphADT<T> {
         }
     }
 
-    /**
-     * Returns an iterator over the shortest path between two vertices using BFS.
-     *
-     * @param startVertex  the starting vertex in the graph
-     * @param targetVertex the target vertex in the graph
-     * @return an iterator over the shortest path from startVertex to targetVertex,
-     *         or an empty iterator if no path exists or vertices are invalid
-     */
     @Override
     public Iterator<T> iteratorShortestPath(T startVertex, T targetVertex) {
         // Verificar se os vertices existem no grafo
