@@ -14,10 +14,13 @@ import DataStructs.Nodes.ListNodes.BasicNode;
  * @param <T> the type of elements returned by the iterator.
  * @param <N> the type of the nodes in the linked list, extending {@link BasicNode}.
  */
+@Deprecated
 public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T> {
     
     /** The current node in the linked list. */
     private N current;
+
+    private N previous;
 
     /** A reference to the ModCount object that tracks modifications to the list. */
     private final ModCount modCount;
@@ -27,8 +30,6 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
 
     /** */
     private boolean canRemove;
-    /** */
-    private N lastReturned;
 
     /**
      * Constructs an iterator for the linked list.
@@ -42,7 +43,7 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
         this.expectedModCount = modCount.value;  // Capture initial modCount value
 
         this.canRemove = false;
-        this.lastReturned = null;
+        this.previous = null;
     }
 
     /**
@@ -71,6 +72,7 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
             throw new NoSuchElementException("No more elements in the list.");
         T prev = current.getElement();
         current = current.getNext();
+        canRemove = true;
         return prev;
     }
 
@@ -78,29 +80,11 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
      * Removes the current element from the list.
      * This operation is not supported by this iterator.
      *
-     * @throws UnsupportedOperationException if called.
+     * @throws UnsupportedOperationException
      */
     @Override
     public void remove() {
-        checkForCoModification();
-        if (!canRemove) {
-            throw new IllegalStateException("");
-        }
-        if (lastReturned == current) {
-            throw new IllegalStateException("");
-        }
-
-        if (lastReturned != null) {
-            N previous = findPrevious(lastReturned);
-            if (previous != null)
-                previous.setNext(lastReturned.getNext());
-        }
-
-        lastReturned = null;
-        canRemove = false;
-        modCount.increment();
-
-        // throw new UnsupportedOperationException("Remove operation is not implemented.");
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -114,13 +98,5 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
         if (expectedModCount != modCount.value) {
             throw new ConcurrentModificationException("List was modified during iteration.");
         }
-    }
-
-    private N findPrevious(N node) {
-        N temp = current;
-        while (temp != null && temp.getNext() != node) {
-            temp = temp.getNext();
-        }
-        return temp;
     }
 }
