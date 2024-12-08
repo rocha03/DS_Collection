@@ -7,20 +7,20 @@ import java.util.NoSuchElementException;
 import DataStructs.Nodes.ListNodes.BasicNode;
 
 /**
- * An iterator for traversing a linked list. This iterator supports basic 
- * operations such as checking for the next element, retrieving the next element, 
+ * An iterator for traversing a linked list. This iterator supports basic
+ * operations such as checking for the next element, retrieving the next
+ * element,
  * and detecting concurrent modifications during iteration.
  * 
  * @param <T> the type of elements returned by the iterator.
- * @param <N> the type of the nodes in the linked list, extending {@link BasicNode}.
+ * @param <N> the type of the nodes in the linked list, extending
+ *            {@link BasicNode}.
  */
 @Deprecated
 public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T> {
-    
+
     /** The current node in the linked list. */
     private N current;
-
-    private N previous;
 
     /** A reference to the ModCount object that tracks modifications to the list. */
     private final ModCount modCount;
@@ -28,29 +28,25 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
     /** The expected modCount value to detect concurrent modifications. */
     private final int expectedModCount;
 
-    /** */
-    private boolean canRemove;
-
     /**
      * Constructs an iterator for the linked list.
      * 
-     * @param node the starting node for the iteration.
-     * @param modCount the ModCount instance that tracks structural modifications to the list.
+     * @param node     the starting node for the iteration.
+     * @param modCount the ModCount instance that tracks structural modifications to
+     *                 the list.
      */
     public LinkedIterator(N node, ModCount modCount) {
         this.current = node;
         this.modCount = modCount;
-        this.expectedModCount = modCount.value;  // Capture initial modCount value
-
-        this.canRemove = false;
-        this.previous = null;
+        this.expectedModCount = modCount.value; // Capture initial modCount value
     }
 
     /**
      * Checks if there are more elements to iterate over in the linked list.
      *
      * @return true if there are more elements, false otherwise.
-     * @throws ConcurrentModificationException if the list has been modified during iteration.
+     * @throws ConcurrentModificationException if the list has been modified during
+     *                                         iteration.
      */
     @Override
     public boolean hasNext() {
@@ -62,8 +58,10 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
      * Returns the next element in the iteration and advances the iterator.
      *
      * @return the next element in the iteration.
-     * @throws NoSuchElementException if there are no more elements to iterate over.
-     * @throws ConcurrentModificationException if the list has been modified during iteration.
+     * @throws NoSuchElementException          if there are no more elements to
+     *                                         iterate over.
+     * @throws ConcurrentModificationException if the list has been modified during
+     *                                         iteration.
      */
     @Override
     public T next() {
@@ -72,7 +70,6 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
             throw new NoSuchElementException("No more elements in the list.");
         T prev = current.getElement();
         current = current.getNext();
-        canRemove = true;
         return prev;
     }
 
@@ -92,7 +89,8 @@ public class LinkedIterator<T, N extends BasicNode<T, N>> implements Iterator<T>
      * If the list's modification count has changed since the iterator was created,
      * a {@link ConcurrentModificationException} is thrown.
      *
-     * @throws ConcurrentModificationException if the list has been modified since the iterator was created.
+     * @throws ConcurrentModificationException if the list has been modified since
+     *                                         the iterator was created.
      */
     private void checkForCoModification() {
         if (expectedModCount != modCount.value) {
