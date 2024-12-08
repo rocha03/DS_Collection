@@ -217,6 +217,11 @@ public abstract class LinkedList<T> implements ListADT<T> {
         private LinearNode<T> current;
 
         /**
+         * The previous node being accessed by the iterator.
+         */
+        private LinearNode<T> previous;
+
+        /**
          * The expected modification count of the list to detect concurrent
          * modifications.
          */
@@ -235,6 +240,7 @@ public abstract class LinkedList<T> implements ListADT<T> {
          */
         public InnerIterator() {
             this.current = head;
+            this.previous = null;
             this.expectedModCount = modCount.getValue();
             this.canRemove = false;
         }
@@ -271,10 +277,10 @@ public abstract class LinkedList<T> implements ListADT<T> {
             if (!hasNext()) {
                 throw new java.util.NoSuchElementException();
             }
-            T result = current.getElement();
+            previous = current;
             current = current.getNext();
             canRemove = true;
-            return result;
+            return previous.getElement();
         }
 
         /**
@@ -290,7 +296,7 @@ public abstract class LinkedList<T> implements ListADT<T> {
                 throw new IllegalStateException("Cannot remove before calling next()");
             }
             try {
-                LinkedList.this.remove(current.getElement());
+                LinkedList.this.remove(previous.getElement());
             } catch (EmptyCollectionException | ElementNotFoundException ex) {
                 // Handle exceptions from the list's remove method
             }
