@@ -301,6 +301,7 @@ public abstract class LinkedList<T> implements ListADT<T> {
                 // Handle exceptions from the list's remove method
             }
             expectedModCount++;
+            modCount.increment();
             canRemove = false;
         }
     }
